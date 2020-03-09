@@ -22,11 +22,11 @@ class DataService {
                 ExerciseGroup(withName: "Pierna", andDrills:
                 [
                     (4, Drill(withExercise: Exercise(withName: "Sentadilla Perfecta", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 12, andWeight: 70)),
-                    (4, Drill(withExercise: Exercise(withName: "Desplante caminando C/P", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 20, andWeight: 4)),
-                    (4, Drill(withExercise: Exercise(withName: "Sentadilla Zorro C/K", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 15, andWeight: 24)),
+                    (4, Drill(withExercise: Exercise(withName: "Desplante caminando", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: Equipment(withName: "Pelota", description: "", image: UIImage(), andMuscleGroups: nil), dificulty: nil, variations: nil), reps: 20, andWeight: 4)),
+                    (4, Drill(withExercise: Exercise(withName: "Sentadilla Zorro", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: Equipment(withName: "Kettlebell", description: "", image: UIImage(), andMuscleGroups: nil), dificulty: nil, variations: nil), reps: 15, andWeight: 24)),
                     (4, Drill(withExercise: Exercise(withName: "Abductor-Aductor", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 15, andWeight: 60)),
-                    (4, Drill(withExercise: Exercise(withName: "Extensión Ind-Sim", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 12, andWeight: 50)),
-                    (4, Drill(withExercise: Exercise(withName: "Flex Rodilla 20-10", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 20, andWeight: 50))
+                    (4, Drill(withExercise: Exercise(withName: "Extensión Ind-Sim", description: "Realizar 12 con cada pierna (peso medio) y 12 con ambas (peso alto)", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 12, andWeight: 50)),
+                    (4, Drill(withExercise: Exercise(withName: "Flex Rodilla 20-10", description: "Hacer 20 repeticiones con peso medio y 10 con peso alto", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: nil, variations: nil), reps: 20, andWeight: 50))
                 ])
             ],
             [

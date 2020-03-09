@@ -15,18 +15,22 @@ class ExcerciseCell: UITableViewCell {
     @IBOutlet weak var excersiceNameLabel: UILabel!
     @IBOutlet weak var repsNumberLabel: UILabel!
     @IBOutlet weak var seriesNumberLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setContentOfCell(withExcerciseImage image:UIImage, excerciseName name:String, repsNumber reps:String, andSeriesNumber series:String) {
-        print("Received: \(name) for \(reps) reps - through \(series) drills")
+    func setContentOfCell(withExcerciseImage image:UIImage, excerciseName name:String, exerciseDescription description:String?, repsNumber reps:String, weight:String?, andSeriesNumber series:String) {
+//        print("Received: \(name) for \(reps) reps - through \(series) drills")
         self.exerciseImage.image = image
         self.excersiceNameLabel.text = name
         self.repsNumberLabel.text = reps
         self.seriesNumberLabel.text = series
+        self.weightLabel.text = weight
+        self.descriptionLabel.text = description ?? ""
     }
 
 }

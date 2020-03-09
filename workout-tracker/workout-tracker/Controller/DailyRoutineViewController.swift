@@ -47,7 +47,18 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RepsSeries") as? ExcerciseCell {
             print(exercises[indexPath.row])
             let currentDrill = dayRoutine[indexPath.section].drills[indexPath.row]
-            cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, repsNumber: "\(currentDrill.drill.reps)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
+            var variations = currentDrill.drill.exercise.description
+            if let equipment = currentDrill.drill.exercise.equipment {
+                variations += "equipo: \(equipment.name)"
+            }
+            if let extras = currentDrill.drill.exercise.variations {
+                variations += "\n"
+                for variation in extras {
+                    variations += "\(variation) "
+                }
+            }
+            cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, repsNumber: "\(currentDrill.drill.reps)", weight: "\(currentDrill.drill.weight ?? 0)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
+
             return cell
         } else { return ExcerciseCell() }
            

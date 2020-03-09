@@ -10,13 +10,26 @@ import UIKit
 
 class RoutineViewController: UIViewController {
 
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "dd/MMM"
+        startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
+        endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func startRoutine(_ sender: UIButton) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        segue.destination as? DailyRoutineViewController
+    }
     /*
     // MARK: - Navigation
 
