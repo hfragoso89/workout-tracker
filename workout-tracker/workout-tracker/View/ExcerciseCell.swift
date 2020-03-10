@@ -33,4 +33,12 @@ class ExcerciseCell: UITableViewCell {
         self.descriptionLabel.text = description ?? ""
     }
 
+    func setContentOfCell(withExcerciseImage image:UIImage, excerciseName name:String, exerciseDescription description:String?, repsNumber reps:String, andSeriesNumber series:String) {
+    //        print("Received: \(name) for \(reps) reps - through \(series) drills")
+            self.exerciseImage.image = image
+            self.excersiceNameLabel.text = name
+            self.repsNumberLabel.text = reps
+            self.seriesNumberLabel.text = series
+            self.descriptionLabel.text = description ?? ""
+        }
 }

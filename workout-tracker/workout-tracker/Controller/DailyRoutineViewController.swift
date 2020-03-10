@@ -36,7 +36,7 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 60
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -44,12 +44,13 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "RepsSeries") as? ExcerciseCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "RepsSeries2") as? ExcerciseCell {
             print(exercises[indexPath.row])
             let currentDrill = dayRoutine[indexPath.section].drills[indexPath.row]
-            var variations = currentDrill.drill.exercise.description
+//            var variations = currentDrill.drill.exercise.description
+            var variations = ""
             if let equipment = currentDrill.drill.exercise.equipment {
-                variations += "equipo: \(equipment.name)"
+                variations += " Equipo: \(equipment.name)"
             }
             if let extras = currentDrill.drill.exercise.variations {
                 variations += "\n"
@@ -57,7 +58,8 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
                     variations += "\(variation) "
                 }
             }
-            cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, repsNumber: "\(currentDrill.drill.reps)", weight: "\(currentDrill.drill.weight ?? 0)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
+            cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, repsNumber: "\(currentDrill.drill.reps)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
+            //cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, repsNumber: "\(currentDrill.drill.reps)", weight: "\(currentDrill.drill.weight ?? 0)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
 
             return cell
         } else { return ExcerciseCell() }

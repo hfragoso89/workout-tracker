@@ -12,6 +12,7 @@ class RoutineViewController: UIViewController {
 
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var routineNameLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -20,6 +21,7 @@ class RoutineViewController: UIViewController {
         dateformatter.dateFormat = "dd/MMM"
         startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
         endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
+        routineNameLabel.text = DataService.instance.getRoutine().name
         // Do any additional setup after loading the view.
     }
     
