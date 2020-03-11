@@ -8,14 +8,15 @@
 
 import UIKit
 
-struct Routine {
+class Routine {
     private(set) public var name:String
     private(set) public var image:UIImage?
     private(set) public var startDate:Date
     private(set) public var endDate:Date?
     private(set) public var owner:User
     private(set) public var days:[[ExerciseGroup]]?
-    private(set) public var weekdays:[Weekday:ExerciseGroup]?
+    private(set) public var weekdays:[Weekday:[ExerciseGroup]]?
+    private var routineQueue:[Int]
     
     init (
         withName name: String,
@@ -24,7 +25,7 @@ struct Routine {
         endDate end: Date?,
         owner:User,
         days:[[ExerciseGroup]]?,
-        andWeekdays weekdays:[Weekday:ExerciseGroup]?
+        andWeekdays weekdays:[Weekday:[ExerciseGroup]]?
     ) {
         self.name = name
         self.image = image
@@ -33,9 +34,11 @@ struct Routine {
         self.owner = owner
         self.days = days
         self.weekdays = weekdays
+        self.routineQueue = []
+        self.routineQueue = computeRoutineQueue()
     }
     
-    mutating func addDay(withExerciseGroupArray array:[ExerciseGroup]) {
+    func addDay(withExerciseGroupArray array:[ExerciseGroup]) {
         if let routineLenght = getRoutineLength(), routineLenght <= ((days?.count ?? 0) + (getweekdaysCount() ?? 0)) {
             if days != nil {
                 days!.append(array)
@@ -43,6 +46,7 @@ struct Routine {
                 days = [array]
             }
         }
+        self.routineQueue = computeRoutineQueue()
     }
     
     func getRoutineLength() -> Int? {
@@ -51,10 +55,68 @@ struct Routine {
         return Int(abs(end.distance(to: startDate))/86400)
     }
     
+    private func computeRoutineQueue() -> [Int] {
+        guard let routineSize = days?.count
+        else {return []}
+        
+        var nextIndex = routineQueue.count == 0 ? 0 : routineQueue[0]
+        var queue = [Int]()
+        let routineLenght = getRoutineLength() ?? 365
+        for _ in 0..<routineLenght {
+            queue.append(nextIndex)
+            nextIndex += 1
+            if nextIndex == routineSize {
+                nextIndex = 0
+            }
+        }
+        return queue
+    }
+    
     func getweekdaysCount() -> Int? {
         
         return nil
     }
+    
+    func peekNextRoutine() -> [ExerciseGroup] {
+        
+        // Verify if there are weekday specific routines
+        if let count = weekdays?.count, count >= 0 {
+            
+            //Get today's weekday value
+            let today = Date()
+            let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            let weekday = gregorian.component(Calendar.Component.weekday, from: today)
+            
+            //Return weekday routine if exists
+            if let dateRoutine = weekdays![Weekday.init(rawValue: weekday)!] {
+                return dateRoutine
+            }
+        }
+        
+        // Return next routine in Regular Queue
+        return days?[routineQueue[0]] ?? []
+    
+    }
+    
+    func popNextRoutine() {
+        // Verify if there are weekday specific routines
+        if let count = weekdays?.count, count >= 0 {
+            
+            //Get today's weekday value
+            let today = Date()
+            let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            let weekday = gregorian.component(Calendar.Component.weekday, from: today)
+            
+            //Return weekday routine if exists
+            if let _ = weekdays![Weekday.init(rawValue: weekday)!] {
+                return
+            }
+        }
+        
+        // Return next routine in Regular Queue
+        routineQueue.remove(at: 0)
+    }
+    
 }
 
 struct ExerciseGroup {
@@ -106,8 +168,44 @@ struct Drill {
     }
 }
 
-enum Weekday {
-    case monday,tuesday,wednesday,thursday,friday,saturday,sunday
+enum Weekday:Int {
+    case sunday=1,monday,tuesday,wednesday,thursday,friday,saturday
+    func printEnglish() {
+        switch self {
+        case .sunday:
+            print("Sunday")
+        case .monday:
+            print("Monday")
+        case .tuesday:
+            print("Tuesday")
+        case .wednesday:
+            print("Wednesday")
+        case .thursday:
+            print("Thursday")
+        case .friday:
+            print("Friday")
+        case .saturday:
+            print("Saturday")
+        }
+    }
+    func printSpanish() {
+        switch self {
+        case .sunday:
+            print("Domingo")
+        case .monday:
+            print("Lunes")
+        case .tuesday:
+            print("Martes")
+        case .wednesday:
+            print("Miércoles")
+        case .thursday:
+            print("Jueves")
+        case .friday:
+            print("Viernes")
+        case .saturday:
+            print("Domingo")
+        }
+    }
 }
 
 extension Date {

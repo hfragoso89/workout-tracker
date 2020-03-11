@@ -341,7 +341,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="redraw" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepsSeries2" rowHeight="60" id="M4Z-D5-fys" customClass="ExcerciseCell" customModule="workout_tracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="145.33333206176758" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4Z-D5-fys" id="qDz-by-0ZK" customClass="ExcerciseCell" customModule="workout_tracker" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4Z-D5-fys" id="qDz-by-0ZK" customClass="ExcerciseCell" customModule="workout_tracker" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -403,10 +403,17 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción del ejercicio" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhF-qa-h2c">
-                                                                            <rect key="frame" x="92.999999999999986" y="0.0" width="137.66666666666663" height="34"/>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mxx-I5-Pcq">
+                                                                            <rect key="frame" x="93" y="2" width="33.666666666666657" height="30"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="300" id="zgh-no-rpZ"/>
+                                                                                <constraint firstAttribute="width" constant="32" id="grZ-4b-wOf"/>
+                                                                                <constraint firstAttribute="height" constant="30" id="yHc-AR-Nej"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción del ejercicio" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhF-qa-h2c">
+                                                                            <rect key="frame" x="129.66666666666666" y="0.0" width="101" height="34"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="zgh-no-rpZ"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                                             <nil key="textColor"/>
@@ -422,6 +429,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="uhF-qa-h2c" id="7Ex-KZ-CTk"/>
+                                            <outlet property="equipmentImage" destination="mxx-I5-Pcq" id="JHQ-hT-r0d"/>
                                             <outlet property="excersiceNameLabel" destination="4do-kh-EkC" id="3g7-1e-VmS"/>
                                             <outlet property="exerciseImage" destination="5c7-5B-Sav" id="GU8-oO-fmn"/>
                                             <outlet property="repsNumberLabel" destination="UJG-ub-MoT" id="PVL-UX-RZO"/>
@@ -435,11 +443,15 @@
                         <viewLayoutGuide key="safeArea" id="fqV-g4-6vx"/>
                     </view>
                     <navigationItem key="navigationItem" id="AXg-CW-945">
-                        <barButtonItem key="rightBarButtonItem" image="play.fill" catalog="system" id="tRj-pm-Ack">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="play.fill" catalog="system" style="plain" id="tRj-pm-Ack">
                             <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="barButtonItemPressed:" destination="JXi-tv-HL7" id="Coy-km-XFc"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="StartRoutine" destination="tRj-pm-Ack" id="K3G-f9-Pgw"/>
                         <outlet property="table" destination="eag-Zf-vG9" id="x2W-sb-12X"/>
                     </connections>
                 </viewController>

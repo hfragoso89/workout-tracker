@@ -17,7 +17,7 @@ struct Equipment {
     init(
         withName name: String,
         description: String,
-        image: UIImage,
+        image: UIImage?,
         andMuscleGroups muscleGroups:[MuscleGroup]?
     ) {
         self.name = name
