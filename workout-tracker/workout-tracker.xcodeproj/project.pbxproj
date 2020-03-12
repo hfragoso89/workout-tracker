@@ -28,6 +28,7 @@
 		6BB4F7DC24146700002862AA /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7DB24146700002862AA /* Routine.swift */; };
 		6BB4F7DE241487DE002862AA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7DD241487DE002862AA /* User.swift */; };
 		6BB4F7E02414B86E002862AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7DF2414B86E002862AA /* Workout.swift */; };
+		6BE067E02419FF4100003947 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE067DF2419FF4100003947 /* WorkoutLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		6BB4F7DB24146700002862AA /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		6BB4F7DD241487DE002862AA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6BB4F7DF2414B86E002862AA /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		6BE067DF2419FF4100003947 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				6BB4F7DB24146700002862AA /* Routine.swift */,
 				6BB4F7DD241487DE002862AA /* User.swift */,
 				6BB4F7DF2414B86E002862AA /* Workout.swift */,
+				6BE067DF2419FF4100003947 /* WorkoutLog.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				6BB4F7B524121440002862AA /* workout_tracker.xcdatamodeld in Sources */,
 				6BB4F7AD24121440002862AA /* SceneDelegate.swift in Sources */,
 				6BB4F7DA24146290002862AA /* Equipment.swift in Sources */,
+				6BE067E02419FF4100003947 /* WorkoutLog.swift in Sources */,
 				6BB4F7E02414B86E002862AA /* Workout.swift in Sources */,
 				6BB4F7CD24136EEB002862AA /* SettingsViewController.swift in Sources */,
 			);
