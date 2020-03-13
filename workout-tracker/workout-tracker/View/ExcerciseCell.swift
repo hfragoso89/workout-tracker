@@ -52,6 +52,7 @@ class ExcerciseCell: UITableViewCell {
         self.descriptionLabel.text = description ?? ""
         if let image = equipmentImage {
             self.equipmentImage.image = image
+            self.equipmentImage.tintColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
         } else {
             self.equipmentImage.isHidden = true
         }

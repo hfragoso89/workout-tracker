@@ -11,21 +11,24 @@ import UIKit
 class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var StopRoutine: UIBarButtonItem!
-    @IBOutlet weak var StartRoutine: UIBarButtonItem!
+    @IBOutlet weak var startRoutineButton: UIButton!
+    
     
     private var isRoutineinProgress:Bool = false
     
     private var dayRoutine:[ExerciseGroup]!
-    private let exercises = ["Sentadilla Perfecta", "Desplante caminando C/P", "Sentadilla Zorro C/K", "Abductor-Aductor", "Extensión Ind-Sim", "Flex Rodilla 20-10"]
-    private let reps = ["12", "20", "15", "15", "12", "20-10"]
-    private let drills = ["4", "4", "4", "4", "4", "4"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
         self.dayRoutine = DataService.instance.getRoutine().peekNextRoutine()
+        var barTitle = ""
+        for element in self.dayRoutine {
+            barTitle += element.name + " "
+        }
+        self.navigationItem.title = barTitle
         // Do any additional setup after loading the view.
     }
     
@@ -49,7 +52,6 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RepsSeries2") as? ExcerciseCell {
-            print(exercises[indexPath.row])
             let currentDrill = dayRoutine[indexPath.section].drills[indexPath.row]
 //            var variations = currentDrill.drill.exercise.description
             var variations = ""
@@ -85,6 +87,20 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        if !isRoutineinProgress{
+            navigationController?.popViewController(animated: true)
+        } else {
+            let alert = UIAlertController(title: "Advertencia", message: "Te encuentras en medio de una sesión de ejercicio. ¿Deseas concluirla?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Sí", style: .default, handler: { action in
+                self.finishRoutine()
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     // Routine managemend & log
     
@@ -103,22 +119,15 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     
     func toggleBarButtonItem() {
         if !isRoutineinProgress {
-            StartRoutine.setBackgroundImage(UIImage(named: "play.fill"), for: .normal, style: .plain, barMetrics: .default)
-//            StartRoutine.setBackButtonBackgroundImage(UIImage(named: "play.fill"), for: .normal, barMetrics: .default)
+            
         } else {
-            StartRoutine.setBackgroundImage(UIImage(named: "stop.fill"), for: .normal, style: .plain, barMetrics: .default)
-//            StartRoutine.setBackButtonBackgroundImage(UIImage(named: "stop.fill"), for: .normal, barMetrics: .default)
+            
         }
     }
 
     
     private func logProgress() {
         print("Routine logged")
-//        let alert = UIAlertController(title: "Felicidades", message: "¡Has completado tu rutina de hoy!", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Finalizar", style: .default, handler: nil))
-//        present(alert, animated: true, completion: {
-//            self.navigationController?.popViewController(animated: true)
-//        })
     }
     
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B16A14F241B2BCC008986E8 /* RoutineEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16A14E241B2BCC008986E8 /* RoutineEditorViewController.swift */; };
+		6B16A151241B4AA0008986E8 /* EditableExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16A150241B4AA0008986E8 /* EditableExerciseCell.swift */; };
+		6B16A153241B4AE1008986E8 /* DayEditorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16A152241B4AE1008986E8 /* DayEditorCollectionCell.swift */; };
 		6B2009BF241745D40026CBC9 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2009BE241745D40026CBC9 /* BorderButton.swift */; };
 		6BB4F7AB24121440002862AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7AA24121440002862AA /* AppDelegate.swift */; };
 		6BB4F7AD24121440002862AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7AC24121440002862AA /* SceneDelegate.swift */; };
@@ -32,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B16A14E241B2BCC008986E8 /* RoutineEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineEditorViewController.swift; sourceTree = "<group>"; };
+		6B16A150241B4AA0008986E8 /* EditableExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableExerciseCell.swift; sourceTree = "<group>"; };
+		6B16A152241B4AE1008986E8 /* DayEditorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEditorCollectionCell.swift; sourceTree = "<group>"; };
 		6B2009BE241745D40026CBC9 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		6BB4F7A724121440002862AA /* workout-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "workout-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB4F7AA24121440002862AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 				6BB4F7CA24136DEA002862AA /* ProfileCreatorViewController.swift */,
 				6BB4F7CC24136EEB002862AA /* SettingsViewController.swift */,
 				6BB4F7CE24137E39002862AA /* DailyRoutineViewController.swift */,
+				6B16A14E241B2BCC008986E8 /* RoutineEditorViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -122,6 +129,8 @@
 				6BB4F7C424122336002862AA /* RingNavigationItem.swift */,
 				6BB4F7D224138064002862AA /* ExcerciseCell.swift */,
 				6B2009BE241745D40026CBC9 /* BorderButton.swift */,
+				6B16A150241B4AA0008986E8 /* EditableExerciseCell.swift */,
+				6B16A152241B4AE1008986E8 /* DayEditorCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,11 +230,14 @@
 				6BB4F7AF24121440002862AA /* MainViewController.swift in Sources */,
 				6BB4F7CB24136DEA002862AA /* ProfileCreatorViewController.swift in Sources */,
 				6BB4F7C724136DC4002862AA /* RoutineViewController.swift in Sources */,
+				6B16A153241B4AE1008986E8 /* DayEditorCollectionCell.swift in Sources */,
 				6BB4F7D624138394002862AA /* DataService.swift in Sources */,
 				6BB4F7DE241487DE002862AA /* User.swift in Sources */,
 				6BB4F7D324138064002862AA /* ExcerciseCell.swift in Sources */,
 				6BB4F7DC24146700002862AA /* Routine.swift in Sources */,
 				6BB4F7AB24121440002862AA /* AppDelegate.swift in Sources */,
+				6B16A14F241B2BCC008986E8 /* RoutineEditorViewController.swift in Sources */,
+				6B16A151241B4AA0008986E8 /* EditableExerciseCell.swift in Sources */,
 				6BB4F7CF24137E39002862AA /* DailyRoutineViewController.swift in Sources */,
 				6BB4F7C524122336002862AA /* RingNavigationItem.swift in Sources */,
 				6BB4F7C924136DD4002862AA /* ProfileViewController.swift in Sources */,

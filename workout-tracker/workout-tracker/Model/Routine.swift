@@ -170,41 +170,48 @@ struct Drill {
 
 enum Weekday:Int {
     case sunday=1,monday,tuesday,wednesday,thursday,friday,saturday
-    func printEnglish() {
+    func EnglishString() -> String {
         switch self {
         case .sunday:
-            print("Sunday")
+            return "Sunday"
         case .monday:
-            print("Monday")
+            return "Monday"
         case .tuesday:
-            print("Tuesday")
+            return "Tuesday"
         case .wednesday:
-            print("Wednesday")
+            return "Wednesday"
         case .thursday:
-            print("Thursday")
+            return "Thursday"
         case .friday:
-            print("Friday")
+            return "Friday"
         case .saturday:
-            print("Saturday")
+            return "Saturday"
         }
     }
-    func printSpanish() {
+    func SpanishString() -> String {
         switch self {
         case .sunday:
-            print("Domingo")
+            return "Domingo"
         case .monday:
-            print("Lunes")
+            return "Lunes"
         case .tuesday:
-            print("Martes")
+            return "Martes"
         case .wednesday:
-            print("Miércoles")
+            return "Miércoles"
         case .thursday:
-            print("Jueves")
+            return "Jueves"
         case .friday:
-            print("Viernes")
+            return "Viernes"
         case .saturday:
-            print("Domingo")
+            return "Domingo"
         }
+    }
+    func getValidationListArray() -> [String] {
+        var result = ["No definido"]
+        for day in 1...7 {
+            result.append(Weekday(rawValue: day)?.SpanishString() ?? "")
+        }
+        return result
     }
 }
 
@@ -212,6 +219,14 @@ extension Date {
     init(_ dateString:String) {
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+        let date = dateStringFormatter.date(from: dateString)!
+        self.init(timeInterval:0, since:date)
+    }
+    
+    init(_ dateString:String, andTemplate format:String) {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateFormat = format
         dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
         let date = dateStringFormatter.date(from: dateString)!
         self.init(timeInterval:0, since:date)

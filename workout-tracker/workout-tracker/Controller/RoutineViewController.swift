@@ -13,6 +13,7 @@ class RoutineViewController: UIViewController {
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var routineNameLabel: UILabel!
+    @IBOutlet weak var nextRoutine: UILabel!
     
     
     override func viewDidLoad() {
@@ -21,8 +22,19 @@ class RoutineViewController: UIViewController {
         dateformatter.dateFormat = "dd/MMM"
         startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
         endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
-        routineNameLabel.text = DataService.instance.getRoutine().name
+        
+        self.navigationItem.title = "Holi"
+            //= DataService.instance.getRoutine().name
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        var nextRoutine = ""
+        for element in DataService.instance.getRoutine().peekNextRoutine() {
+            nextRoutine += element.name + " "
+        }
+        self.nextRoutine.text = nextRoutine
     }
     
     @IBAction func startRoutine(_ sender: UIButton) {
