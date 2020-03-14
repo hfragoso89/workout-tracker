@@ -224,11 +224,20 @@ extension Date {
         self.init(timeInterval:0, since:date)
     }
     
-    init(_ dateString:String, andTemplate format:String) {
+    init(_ dateString:String, withStyle style:DateFormatter.Style, andLocale locale:Locale) {
         let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = format
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+        dateStringFormatter.dateStyle = style
+        dateStringFormatter.timeStyle = .none
+        dateStringFormatter.locale = locale
         let date = dateStringFormatter.date(from: dateString)!
         self.init(timeInterval:0, since:date)
+    }
+    
+    func generateString(withDateStyle dateStyle:DateFormatter.Style, timeStyle: DateFormatter.Style, andLocale locale:Locale) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = dateStyle
+        formatter.timeStyle = timeStyle
+        formatter.locale = locale
+        return formatter.string(from: self)
     }
 }

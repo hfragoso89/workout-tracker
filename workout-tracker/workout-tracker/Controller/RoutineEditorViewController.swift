@@ -19,12 +19,15 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var daysNumberLabel: UILabel!
     @IBOutlet weak var addDaysButton: UIButton!
     @IBOutlet weak var removeDaysButton: UIButton!
+    
     @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var datePickerViewLabel: UILabel!
     
     @IBOutlet weak var pickerViewControl: UIPickerView!
     @IBOutlet weak var datePickerViewControl: UIDatePicker!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
     
     var numberOfDays:Int = 0 {
         willSet {
@@ -32,8 +35,11 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
                 self.numberOfDays = 1
                 disableButton(self.removeDaysButton, animated: true)
             } else {
-                let startDate = Date(self.startDateField.text ?? "2020-01-01")
-                let endDate = Date((self.endDateField.text ?? "2020-01-02") == "" ? "2020-01-02" : self.endDateField.text!)
+                let placeHolderDate = Date("2020-01-01")
+                print(startDateField.text)
+                let startDate = Date(self.startDateField.text ?? placeHolderDate.generateString(withDateStyle: .short, timeStyle: .none, andLocale: Locale.current), withStyle: .short, andLocale: Locale.current)
+                let endDate = Date(self.endDateField.text ?? placeHolderDate.generateString(withDateStyle: .short, timeStyle: .none, andLocale: Locale.current), withStyle: .short, andLocale: Locale.current)
+                print("\n\nStart: \(startDate)\nEnd: \(endDate)")
                 self.numberOfDays = Int(abs(endDate.distance(to: startDate))/86400) <= newValue ? newValue : Int(abs(endDate.distance(to: startDate))/86400)
             }
             self.collectionView.reloadData()
@@ -44,12 +50,13 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
         didSet{
             if self.isNewRoutine {
                 numberOfDays = 1
-                
+                self.controllerTitleLabel.text = "Nueva Rutina"
             } else {
-                
+                self.controllerTitleLabel.text = "Editar Rutina"
             }
         }
     }
+    var dateFieldCurrentlyInEdition:DatePickerOptions = .none
     
     var routine:Routine?
     
@@ -81,7 +88,7 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     @IBAction func selectDateButtonPressed(_ sender: Any) {
-        setSelectedDate(date: self.datePickerViewControl.date, inField: self.startDateField)
+        setSelectedDate(date: self.datePickerViewControl.date, inField: self.dateFieldCurrentlyInEdition == .startDateField ?  self.startDateField : self.endDateField)
         dismissDatePickerView(animated: true)
     }
     
@@ -114,9 +121,22 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.startDateField || textField == self.endDateField {
+            self.datePickerViewLabel.text = textField == self.startDateField ? "Fecha de inicio" : "Fecha de fin"
+            self.dateFieldCurrentlyInEdition = textField == self.startDateField ? .startDateField : .endDateField
             showDatePickerView(animated: true)
             return false
         }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == self.routineNameField {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
@@ -127,19 +147,29 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func showDatePickerView(animated: Bool){
+        if !self.datePickerView.isHidden {return}
         self.datePickerView.isHidden = false
+        self.datePickerView.alpha = 0
+        self.datePickerView.frame = CGRect(x: 0, y: (self.parent?.view.frame.height ?? 800 + self.datePickerView.frame.height), width: self.datePickerView.frame.width, height: self.datePickerView.frame.height)
+        UIView.animate(withDuration: 0.6, animations: {
+            self.datePickerView.frame = CGRect(x: 0, y: (self.datePickerView.frame.minY - self.datePickerView.frame.height), width: self.datePickerView.frame.width, height: self.datePickerView.frame.height)
+            self.datePickerView.alpha = 0.9
+        })
     }
     
     func dismissDatePickerView(animated: Bool){
+        if self.datePickerView.isHidden {return}
         self.datePickerView.isHidden = true
+        self.datePickerView.alpha = 0.9
+        //self.datePickerView.frame = CGRect(x: 0, y: (self.datePickerView.frame.minY - self.datePickerView.frame.height), width: self.datePickerView.frame.width, height: self.datePickerView.frame.height)
+        UIView.animate(withDuration: 0.6, animations: {
+            self.datePickerView.frame = CGRect(x: 0, y: (self.parent?.view.frame.height ?? 800 + self.datePickerView.frame.height), width: self.datePickerView.frame.width, height: self.datePickerView.frame.height)
+            self.datePickerView.alpha = 0
+        })
     }
     
     func setSelectedDate(date: Date, inField field: UITextField){
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        formatter.locale = Locale.current
-        field.text = formatter.string(from: date)
+        field.text = date.generateString(withDateStyle: .short, timeStyle: .none, andLocale: Locale.current)
     }
     
 
@@ -153,4 +183,10 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     }
     */
 
+}
+
+enum DatePickerOptions {
+    case startDateField
+    case endDateField
+    case none
 }

@@ -542,10 +542,23 @@
                                             <action selector="selectDateButtonPressed:" destination="7dF-nH-gP3" eventType="touchUpInside" id="0po-7B-Zrj"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inicio / Fin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-aS-4qN">
+                                        <rect key="frame" x="8" y="8" width="238" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="238" id="e3f-cT-hE6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="pcq-k7-uyh" secondAttribute="trailing" constant="8" id="BCP-tq-lsC"/>
+                                    <constraint firstItem="Muj-aS-4qN" firstAttribute="top" secondItem="jQP-A5-9Sc" secondAttribute="top" constant="8" id="FZN-QZ-lIg"/>
+                                    <constraint firstItem="pcq-k7-uyh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Muj-aS-4qN" secondAttribute="trailing" constant="8" symbolic="YES" id="Lpo-H4-iFU"/>
+                                    <constraint firstItem="Muj-aS-4qN" firstAttribute="leading" secondItem="jQP-A5-9Sc" secondAttribute="leading" constant="8" id="NY5-a8-u3a"/>
+                                    <constraint firstItem="hEI-Xe-whV" firstAttribute="top" secondItem="Muj-aS-4qN" secondAttribute="bottom" constant="8" id="OSL-Jv-HkT"/>
                                     <constraint firstItem="pcq-k7-uyh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jQP-A5-9Sc" secondAttribute="leading" constant="20" symbolic="YES" id="Utn-Ws-kqK"/>
                                     <constraint firstItem="hEI-Xe-whV" firstAttribute="top" secondItem="pcq-k7-uyh" secondAttribute="bottom" constant="8" id="Vjj-kG-biZ"/>
                                     <constraint firstItem="hEI-Xe-whV" firstAttribute="top" secondItem="pcq-k7-uyh" secondAttribute="bottom" constant="8" id="a2e-9w-v6m"/>
@@ -590,6 +603,7 @@
                         <outlet property="controllerTitleLabel" destination="K50-ca-562" id="7y1-H2-jtv"/>
                         <outlet property="datePickerView" destination="jQP-A5-9Sc" id="Ubp-57-KIh"/>
                         <outlet property="datePickerViewControl" destination="hEI-Xe-whV" id="oVc-ur-WW7"/>
+                        <outlet property="datePickerViewLabel" destination="Muj-aS-4qN" id="4zF-s4-UaH"/>
                         <outlet property="daysNumberLabel" destination="3Rd-L8-lZu" id="Fd8-p5-g88"/>
                         <outlet property="endDateField" destination="PqN-1m-Y32" id="hIw-FB-KQS"/>
                         <outlet property="pickerViewControl" destination="Qya-Q6-k3l" id="EO1-D5-5nw"/>
@@ -1287,8 +1301,8 @@
         <image name="calendar.circle" catalog="system" width="64" height="60"/>
         <image name="disks_blur_image" width="750" height="1334"/>
         <image name="gauge" catalog="system" width="64" height="60"/>
-        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="gear" width="16" height="16"/>
+        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="kettlebell_icon" width="213.33332824707031" height="213.33332824707031"/>
         <image name="minus.circle" catalog="system" width="64" height="60"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>
