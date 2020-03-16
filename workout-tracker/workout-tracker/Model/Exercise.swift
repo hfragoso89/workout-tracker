@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
- Exercise {
+class Exercise: NSFetchRequestResult {
     
-    private(set) public var name:String
-    private(set) public var description:String
-    private(set) public var image:UIImage
-    private(set) public var muscleGroup:MuscleGroup
-    private(set) public var equipment: Equipment?
-    private(set) public var dificulty: Dificulty?
-    private(set) public var variations:[String]?
+    @NSManaged public var name:String
+    @NSManaged public var descriptionText:String
+    @NSManaged public var image:UIImage
+    @NSManaged public var muscleGroup:MuscleGroup
+    @NSManaged public var equipment: Equipment?
+    @NSManaged public var dificulty: Dificulty?
+    @NSManaged public var variations:[String]?
     
     init(
         withName name:String,
@@ -28,7 +29,7 @@ import UIKit
         variations: [String]?
     ) {
         self.name = name
-        self.description = description
+        self.descriptionText = description
         self.image = image
         self.muscleGroup = muscleGroup
         self.equipment = equipment
@@ -36,7 +37,7 @@ import UIKit
         self.variations = variations
     }
     
-    mutating func changeImage(withImage image:UIImage) {
+    func changeImage(withImage image:UIImage) {
         self.image = image
     }
     
@@ -47,6 +48,7 @@ import UIKit
     
 }
 
+/*
 enum MuscleGroup {
     case pecs
     case traps
@@ -78,3 +80,4 @@ enum Dificulty {
     case notApplicable
     
 }
+*/

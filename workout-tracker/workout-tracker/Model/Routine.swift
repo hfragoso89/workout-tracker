@@ -119,7 +119,7 @@ class Routine {
     
 }
 
-struct ExerciseGroup {
+class ExerciseGroup {
     private(set) public var name:String
     private(set) public var drills: [(numberOfDrills:Int?,drill:Drill)]
     
@@ -152,7 +152,7 @@ struct ExerciseGroup {
     }
 }
 
-struct Drill {
+class Drill {
     private(set) public var reps: Int
     private(set) public var weight: Double?
     private(set) public var exercise:Exercise

@@ -16,6 +16,8 @@ struct User {
     private(set) public var gender:Gender
 }
 
+/*
 enum Gender {
     case male, female
 }
+ */
