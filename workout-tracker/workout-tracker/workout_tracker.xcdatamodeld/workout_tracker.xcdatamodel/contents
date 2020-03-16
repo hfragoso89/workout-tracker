@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G3020" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Dificulty" representedClassName=".Dificulty" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="dificulty" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="Equipment" representedClassName=".Equipment" syncable="YES" codeGenerationType="category" coreSpotlightDisplayNameExpression="Equipment">
+        <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="equipment" inverseEntity="Exercise"/>
+        <relationship name="muscleGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="equipment" inverseEntity="MuscleGroup"/>
+    </entity>
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES" codeGenerationType="category">
+        <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="dificulty" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dificulty" inverseName="exercises" inverseEntity="Dificulty"/>
+        <relationship name="equipment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Equipment" inverseName="exercises" inverseEntity="Equipment"/>
+        <relationship name="muscleGroup" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="exercises" inverseEntity="MuscleGroup"/>
+        <relationship name="variations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Variations" inverseName="exercises" inverseEntity="Variations"/>
+    </entity>
+    <entity name="MuscleGroup" representedClassName=".MuscleGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="equipment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Equipment" inverseName="muscleGroup" inverseEntity="Equipment"/>
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="Variations" representedClassName=".Variations" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="variations" inverseEntity="Exercise"/>
+    </entity>
     <elements>
-        <element name="Entity" positionX="-63" positionY="-18" width="128" height="43"/>
+        <element name="Equipment" positionX="-321.765625" positionY="-109.90234375" width="128" height="118"/>
+        <element name="Variations" positionX="-342.15625" positionY="-219.53125" width="128" height="73"/>
+        <element name="MuscleGroup" positionX="-82.6328125" positionY="120.7421875" width="128" height="88"/>
+        <element name="Exercise" positionX="-60.1328125" positionY="-262.1953125" width="128" height="148"/>
+        <element name="Dificulty" positionX="94.3671875" positionY="-32.32421875" width="128" height="73"/>
     </elements>
 </model>

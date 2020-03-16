@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Exercise {
+ Exercise {
     
     private(set) public var name:String
     private(set) public var description:String
