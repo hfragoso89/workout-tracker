@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class Exercise: NSFetchRequestResult {
+public class Exercise: NSManagedObject {
     
+   /*
     @NSManaged public var name:String
     @NSManaged public var descriptionText:String
     @NSManaged public var image:UIImage
@@ -22,28 +23,32 @@ class Exercise: NSFetchRequestResult {
     init(
         withName name:String,
         description: String,
-        image: UIImage,
-        muscleGroup: MuscleGroup,
+        image: Data,
+        muscleGroup: NSSet,
         equipment: Equipment?,
         dificulty: Dificulty?,
-        variations: [String]?
+        variations: NSSet?,
+        andContext context:NSManagedObjectContext
     ) {
+        
+        super.init(entity: NSEntityDescription(), insertInto: context)
+        
         self.name = name
         self.descriptionText = description
         self.image = image
-        self.muscleGroup = muscleGroup
+        self.muscleGroup = muscleGroup as NSSet
         self.equipment = equipment
-        self.dificulty = dificulty ?? .notDefined
-        self.variations = variations
+        self.dificulty = dificulty
+        self.variations = variations as NSSet?
     }
-    
-    func changeImage(withImage image:UIImage) {
+    */
+    func changeImage(withImage image:Data) {
         self.image = image
     }
     
-    func copyExcercise(withVariations variations:[String]) -> Exercise {
-        return Exercise(withName: self.name, description: self.description, image: self.image, muscleGroup: self.muscleGroup, equipment: self.equipment, dificulty: self.dificulty, variations: variations)
-    }
+    //func copyExcercise(withVariations variations:Set<Variations>) -> Exercise {
+    //    return Exercise(withName: self.name ?? "Unamed", description: self.description, image: self.image ?? UIImage(named: "Routine_btn_dark")!.pngData()!, muscleGroup: self.muscleGroup ?? [MuscleGroup()], equipment: self.equipment, dificulty: self.dificulty, variations: variations as NSSet)
+    //}
     
     
 }

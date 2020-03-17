@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DataService {
     
@@ -14,14 +15,15 @@ class DataService {
     
     private let defaultImage = UIImage(named: "Routine_btn_dark")!
     
-    private let user = User(firstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birhdate: Date("1989/12/31"), gender: .male)
+    private let user = User()
+    //(firstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birhdate: Date("1989/12/31"), gender: .male)
     
-    private let routine = Routine(withName: "Rutina 1", image: UIImage(named: "Weights_image")!, startDate: Date("2020/02/17"), endDate: Date("2020/03/17"), owner: User(firstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birhdate: Date("1989/12/31"), gender: .male), days:
+    /*private let routine = Routine(withName: "Rutina 1", image: UIImage(named: "Weights_image")!, startDate: Date("2020/02/17"), endDate: Date("2020/03/17"), owner: User(firstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birhdate: Date("1989/12/31"), gender: .male), days:
         [
             [
                 ExerciseGroup(withName: "Hombros", andDrills:
                     [
-                        (4, Drill(withExercise: Exercise(withName: "Press Neutro alternado con mancuerna", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .delts, equipment: Equipment(withName: "Mancuerna", description: "", image: UIImage(named: "dumbbell_icon_white"), andMuscleGroups:nil), dificulty: nil, variations: nil), reps: 20, andWeight: 15)),
+                        (4, Drill(withExercise: Exercise(withName: "Press Neutro alternado con mancuerna", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .delts, equipment: Equipment(withName: "Mancuerna", description: "", image: UIImage(named: "dumbbell_icon_white")?.pngData()!, andMuscleGroups:nil), dificulty: nil, variations: nil, andContext: UIApplication.managedContext), reps: 20, andWeight: 15)),
                         (4, Drill(withExercise: Exercise(withName: "Lateral con mancuernas 21", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .traps, equipment: Equipment(withName: "Mancuerna", description: "", image: UIImage(named: "dumbbell_icon_white"), andMuscleGroups:nil), dificulty: nil, variations: nil), reps: 21, andWeight: 10)),
                         (4, Drill(withExercise: Exercise(withName: "Elevación frontal con barra Z", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .delts, equipment: Equipment(withName: "Barra Z", description: "", image: UIImage(named: "Z_bar_icon_white"), andMuscleGroups:nil), dificulty: nil, variations: ["Prono","Supino"]), reps: 15, andWeight: 40)),
                         (4, Drill(withExercise: Exercise(withName: "Remo vertical con barra Z", description: "", image: UIImage(named: "Routine_btn_dark")!, muscleGroup: .traps, equipment: Equipment(withName: "Barra Z", description: "", image: UIImage(named: "Z_bar_icon_white"), andMuscleGroups:nil), dificulty: nil, variations: nil), reps: 15, andWeight: 40))
@@ -94,7 +96,8 @@ class DataService {
             ])
         ]
     ])
-    
+ */
+    /*
     private let equipmentOptions = [
         "ZBar": Equipment(withName: "Barra Z", description: "", image: UIImage(named: "Z_bar_icon_white")!, andMuscleGroups:
             [
@@ -173,7 +176,7 @@ class DataService {
             ]
         ),
     ]
-    
+    */
 //    private let categories = [
 //        Category(title: "SHIRTS", imageName: "shirts.png"),
 //        Category(title: "HODDIES", imageName: "hoodies.png"),
@@ -185,18 +188,82 @@ class DataService {
 //        return categories
 //    }
     
+    // MARK: - CoreDataManagement
+    
+    func createData() {
+        // Refer to container in AppDelegate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        
+        //Create a context from container
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Create entity
+        let exerciseEntity = NSEntityDescription.entity(forEntityName: "Exercise", in: managedContext)!
+        
+        //
+        let exercise = NSManagedObject(entity: exerciseEntity, insertInto: managedContext)
+        exercise.setValue("Rotación de piernas sobre balón", forKey: "name")
+        if let imageData = UIImage(named: "Routine_btn_dark")?.pngData() {
+            exercise.setValue(imageData, forKey: "image")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Couldn't save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    
+    
+    func createUserInfo() {
+        if !checkIfUserDataExists() {
+            
+        }
+        return
+    }
+    
+    func fetchInformation(for entity:String) -> [NSManagedObject]? {
+        
+        // Refer to container in AppDelegate
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return nil}
+        
+        //Create a context from container
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            return result as? [NSManagedObject]
+        } catch {
+            print("Unable to retrieve information for entity: \(entity)")
+            return nil
+        }
+        
+    }
+    
+    func checkIfCurrentRoutineExists() -> Bool {
+        return fetchInformation(for: "Routine")?.count ?? 0 > 0
+    }
+    
+    func checkIfUserDataExists() -> Bool {
+        return fetchInformation(for: "User")?.count ?? 0 > 0
+    }
+    
     func getUser() -> User {
         return user
     }
     
-    func getRoutine() -> Routine {
+    /*func getRoutine() -> Routine {
         return routine
-    }
-    
+    }*/
+    /*
     func getEquipment() -> [String:Equipment] {
         return equipmentOptions
     }
-    
+    */
     private let exercises = ["Sentadilla Perfecta", "Desplante caminando C/P", "Sentadilla Zorro C/K", "Abductor-Aductor", "Extensión Ind-Sim", "Flex Rodilla 20-10"]
     private let reps = ["12", "20", "15", "15", "12", "20-10"]
     private let drills = ["4", "4", "4", "4", "4", "4"]

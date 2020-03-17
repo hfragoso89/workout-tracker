@@ -43,7 +43,7 @@ class DayEditorCollectionCell: UICollectionViewCell, UIPickerViewDelegate, UIPic
     // MARK: - UITableViewDelegate/DataSource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dayRoutine?[section].drills.count ?? 0
+        return /*dayRoutine?[section].drills.count? ??*/ 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

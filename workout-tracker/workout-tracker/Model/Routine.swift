@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
-class Routine {
+public class Routine: NSManagedObject {
+/*
     private(set) public var name:String
     private(set) public var image:UIImage?
     private(set) public var startDate:Date
@@ -71,12 +73,12 @@ class Routine {
         }
         return queue
     }
-    
+ 
     func getweekdaysCount() -> Int? {
         
         return nil
     }
-    
+ 
     func peekNextRoutine() -> [ExerciseGroup] {
         
         // Verify if there are weekday specific routines
@@ -116,10 +118,12 @@ class Routine {
         // Return next routine in Regular Queue
         routineQueue.remove(at: 0)
     }
-    
+ */
 }
 
-class ExerciseGroup {
+
+public class ExerciseGroup: NSManagedObject {
+   /*
     private(set) public var name:String
     private(set) public var drills: [(numberOfDrills:Int?,drill:Drill)]
     
@@ -131,11 +135,11 @@ class ExerciseGroup {
         self.drills = drills
     }
     
-    mutating func add(drill:Drill, times:Int?) {
+    func add(drill:Drill, times:Int?) {
         self.drills.append((times,drill))
     }
     
-    mutating func autoGenerateName() {
+    func autoGenerateName() {
         guard drills.count > 1, self.name != "N/A"
             else { return }
         var result = ""
@@ -150,9 +154,12 @@ class ExerciseGroup {
         }
         self.name = result
     }
+  */
 }
 
-class Drill {
+
+public class Drill: NSManagedObject {
+    /*
     private(set) public var reps: Int
     private(set) public var weight: Double?
     private(set) public var exercise:Exercise
@@ -166,6 +173,11 @@ class Drill {
         self.reps = reps
         self.weight = weight
     }
+*/
+}
+
+public class WorkoutDay: NSManagedObject {
+    
 }
 
 enum Weekday:Int {

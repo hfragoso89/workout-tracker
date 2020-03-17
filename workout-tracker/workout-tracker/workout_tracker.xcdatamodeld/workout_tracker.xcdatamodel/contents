@@ -2,13 +2,21 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G3020" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Dificulty" representedClassName=".Dificulty" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="dificulty" inverseEntity="Exercise"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="dificulty" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="Drill" representedClassName=".Drill" syncable="YES" codeGenerationType="category">
+        <attribute name="numberOfDrills" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reptetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weightUnit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Exercise" inverseName="drills" inverseEntity="Exercise"/>
+        <relationship name="exerciseGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseGroup" inverseName="drills" inverseEntity="ExerciseGroup"/>
     </entity>
     <entity name="Equipment" representedClassName=".Equipment" syncable="YES" codeGenerationType="category" coreSpotlightDisplayNameExpression="Equipment">
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="equipment" inverseEntity="Exercise"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="equipment" inverseEntity="Exercise"/>
         <relationship name="muscleGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="equipment" inverseEntity="MuscleGroup"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" syncable="YES" codeGenerationType="category">
@@ -16,24 +24,60 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="dificulty" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dificulty" inverseName="exercises" inverseEntity="Dificulty"/>
+        <relationship name="drills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Drill" inverseName="exercise" inverseEntity="Drill"/>
         <relationship name="equipment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Equipment" inverseName="exercises" inverseEntity="Equipment"/>
         <relationship name="muscleGroup" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="exercises" inverseEntity="MuscleGroup"/>
         <relationship name="variations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Variations" inverseName="exercises" inverseEntity="Variations"/>
     </entity>
+    <entity name="ExerciseGroup" representedClassName=".ExerciseGroup" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="drills" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Drill" inverseName="exerciseGroup" inverseEntity="Drill"/>
+        <relationship name="workoutDays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="exerciseGroups" inverseEntity="WorkoutDay"/>
+    </entity>
     <entity name="MuscleGroup" representedClassName=".MuscleGroup" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="equipment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Equipment" inverseName="muscleGroup" inverseEntity="Equipment"/>
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise"/>
+        <relationship name="equipment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Equipment" inverseName="muscleGroup" inverseEntity="Equipment"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="Routine" representedClassName=".Routine" syncable="YES" codeGenerationType="category">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="currentRoutine" inverseEntity="User"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="routines" inverseEntity="User"/>
+        <relationship name="workoutDays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="routine" inverseEntity="WorkoutDay"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES" codeGenerationType="category">
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="photo" optional="YES" attributeType="Binary"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="currentRoutine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routine" inverseName="owner" inverseEntity="Routine"/>
+        <relationship name="routines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Routine" inverseName="user" inverseEntity="Routine"/>
     </entity>
     <entity name="Variations" representedClassName=".Variations" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="variations" inverseEntity="Exercise"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="variations" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="WorkoutDay" representedClassName=".WorkoutDay" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="weekDay" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="7" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exerciseGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseGroup" inverseName="workoutDays" inverseEntity="ExerciseGroup"/>
+        <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routine" inverseName="workoutDays" inverseEntity="Routine"/>
     </entity>
     <elements>
-        <element name="Equipment" positionX="-321.765625" positionY="-109.90234375" width="128" height="118"/>
-        <element name="Variations" positionX="-342.15625" positionY="-219.53125" width="128" height="73"/>
-        <element name="MuscleGroup" positionX="-82.6328125" positionY="120.7421875" width="128" height="88"/>
-        <element name="Exercise" positionX="-60.1328125" positionY="-262.1953125" width="128" height="148"/>
-        <element name="Dificulty" positionX="94.3671875" positionY="-32.32421875" width="128" height="73"/>
+        <element name="Equipment" positionX="-228.46484375" positionY="103.98046875" width="128" height="118"/>
+        <element name="Variations" positionX="189.5546875" positionY="-138.69921875" width="128" height="73"/>
+        <element name="MuscleGroup" positionX="163.953125" positionY="83.140625" width="128" height="88"/>
+        <element name="Exercise" positionX="-62.41015625" positionY="-239.21875" width="128" height="163"/>
+        <element name="Dificulty" positionX="98.10546875" positionY="-230.8125" width="128" height="73"/>
+        <element name="User" positionX="-666.63671875" positionY="215.58984375" width="128" height="163"/>
+        <element name="Routine" positionX="-427.3203125" positionY="99.24609375" width="128" height="148"/>
+        <element name="ExerciseGroup" positionX="-679.28125" positionY="-96.00390625" width="128" height="88"/>
+        <element name="WorkoutDay" positionX="-351.77734375" positionY="-39.03515625" width="128" height="103"/>
+        <element name="Drill" positionX="-514.96484375" positionY="-175.04296875" width="128" height="133"/>
     </elements>
 </model>

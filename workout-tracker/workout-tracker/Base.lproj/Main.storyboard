@@ -1301,8 +1301,8 @@
         <image name="calendar.circle" catalog="system" width="64" height="60"/>
         <image name="disks_blur_image" width="750" height="1334"/>
         <image name="gauge" catalog="system" width="64" height="60"/>
-        <image name="gear" width="16" height="16"/>
         <image name="gear" catalog="system" width="64" height="58"/>
+        <image name="gear" width="16" height="16"/>
         <image name="kettlebell_icon" width="213.33332824707031" height="213.33332824707031"/>
         <image name="minus.circle" catalog="system" width="64" height="60"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>

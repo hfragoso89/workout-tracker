@@ -7,17 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
-struct User {
+public class User : NSManagedObject {
+    /*
     private(set) public var firstName:String
     private(set) public var lastName:String
     private(set) public var image:UIImage
     private(set) public var birhdate:Date
     private(set) public var gender:Gender
-}
+     */
+ }
 
-/*
+
 enum Gender {
     case male, female
 }
- */
+ 

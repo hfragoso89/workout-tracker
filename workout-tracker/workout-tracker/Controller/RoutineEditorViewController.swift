@@ -36,7 +36,7 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
                 disableButton(self.removeDaysButton, animated: true)
             } else {
                 let placeHolderDate = Date("2020-01-01")
-                print(startDateField.text)
+                
                 let startDate = Date(self.startDateField.text ?? placeHolderDate.generateString(withDateStyle: .short, timeStyle: .none, andLocale: Locale.current), withStyle: .short, andLocale: Locale.current)
                 let endDate = Date(self.endDateField.text ?? placeHolderDate.generateString(withDateStyle: .short, timeStyle: .none, andLocale: Locale.current), withStyle: .short, andLocale: Locale.current)
                 print("\n\nStart: \(startDate)\nEnd: \(endDate)")
