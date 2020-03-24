@@ -9,51 +9,46 @@
 import UIKit
 import CoreData
 
-public class Exercise: NSManagedObject {
+struct Exercise {
     
-   /*
-    @NSManaged public var name:String
-    @NSManaged public var descriptionText:String
-    @NSManaged public var image:UIImage
-    @NSManaged public var muscleGroup:MuscleGroup
-    @NSManaged public var equipment: Equipment?
-    @NSManaged public var dificulty: Dificulty?
-    @NSManaged public var variations:[String]?
+    private(set) public var name:String
+    private(set) public var description:String
+    private(set) public var image:UIImage
+    private(set) public var muscleGroup:MuscleGroup
+    private(set) public var equipment: Equipment?
+    private(set) public var dificulty: Dificulty?
+    private(set) public var variations:[String]?
     
     init(
         withName name:String,
         description: String,
-        image: Data,
-        muscleGroup: NSSet,
+        image: UIImage,
+        muscleGroup: MuscleGroup,
         equipment: Equipment?,
         dificulty: Dificulty?,
-        variations: NSSet?,
-        andContext context:NSManagedObjectContext
+        variations: [String]?
     ) {
         
-        super.init(entity: NSEntityDescription(), insertInto: context)
-        
         self.name = name
-        self.descriptionText = description
+        self.description = description
         self.image = image
-        self.muscleGroup = muscleGroup as NSSet
+        self.muscleGroup = muscleGroup
         self.equipment = equipment
         self.dificulty = dificulty
-        self.variations = variations as NSSet?
+        self.variations = variations
     }
-    */
-    func changeImage(withImage image:Data) {
+    
+    mutating func changeImage(withImage image:UIImage) {
         self.image = image
     }
     
-    //func copyExcercise(withVariations variations:Set<Variations>) -> Exercise {
-    //    return Exercise(withName: self.name ?? "Unamed", description: self.description, image: self.image ?? UIImage(named: "Routine_btn_dark")!.pngData()!, muscleGroup: self.muscleGroup ?? [MuscleGroup()], equipment: self.equipment, dificulty: self.dificulty, variations: variations as NSSet)
-    //}
+    func copyExcercise(withVariations variations:[String]) -> Exercise {
+        return Exercise(withName: self.name, description: self.description, image: self.image, muscleGroup: self.muscleGroup, equipment: self.equipment, dificulty: self.dificulty, variations: variations)
+    }
     
     
 }
 
-/*
 enum MuscleGroup {
     case pecs
     case traps
@@ -85,4 +80,4 @@ enum Dificulty {
     case notApplicable
     
 }
-*/
+

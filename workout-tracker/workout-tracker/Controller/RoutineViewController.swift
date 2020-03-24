@@ -21,13 +21,11 @@ class RoutineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard container != nil else {
-            fatalError("This view needs a persistent container")
-        }
+        
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "dd/MMM"
-        //startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
-        //endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
+        startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
+        endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
         
         self.navigationItem.title = "Holi"
             //= DataService.instance.getRoutine().name
@@ -37,12 +35,12 @@ class RoutineViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         var nextRoutine = ""
-        /*
+        
         for element in DataService.instance.getRoutine().peekNextRoutine() {
             nextRoutine += element.name + " "
         }
         self.nextRoutine.text = nextRoutine
-    */
+    
     }
     
     @IBAction func startRoutine(_ sender: UIButton) {

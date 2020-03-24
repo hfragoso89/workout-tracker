@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-public class Routine: NSManagedObject {
-/*
+struct Routine {
+
     private(set) public var name:String
     private(set) public var image:UIImage?
     private(set) public var startDate:Date
@@ -40,7 +40,7 @@ public class Routine: NSManagedObject {
         self.routineQueue = computeRoutineQueue()
     }
     
-    func addDay(withExerciseGroupArray array:[ExerciseGroup]) {
+    mutating func addDay(withExerciseGroupArray array:[ExerciseGroup]) {
         if let routineLenght = getRoutineLength(), routineLenght <= ((days?.count ?? 0) + (getweekdaysCount() ?? 0)) {
             if days != nil {
                 days!.append(array)
@@ -100,7 +100,7 @@ public class Routine: NSManagedObject {
     
     }
     
-    func popNextRoutine() {
+    mutating func popNextRoutine() {
         // Verify if there are weekday specific routines
         if let count = weekdays?.count, count >= 0 {
             
@@ -118,12 +118,11 @@ public class Routine: NSManagedObject {
         // Return next routine in Regular Queue
         routineQueue.remove(at: 0)
     }
- */
 }
 
 
-public class ExerciseGroup: NSManagedObject {
-   /*
+struct ExerciseGroup {
+    
     private(set) public var name:String
     private(set) public var drills: [(numberOfDrills:Int?,drill:Drill)]
     
@@ -135,11 +134,11 @@ public class ExerciseGroup: NSManagedObject {
         self.drills = drills
     }
     
-    func add(drill:Drill, times:Int?) {
+    mutating func add(drill:Drill, times:Int?) {
         self.drills.append((times,drill))
     }
     
-    func autoGenerateName() {
+    mutating func autoGenerateName() {
         guard drills.count > 1, self.name != "N/A"
             else { return }
         var result = ""
@@ -154,12 +153,11 @@ public class ExerciseGroup: NSManagedObject {
         }
         self.name = result
     }
-  */
 }
 
 
-public class Drill: NSManagedObject {
-    /*
+struct Drill {
+
     private(set) public var reps: Int
     private(set) public var weight: Double?
     private(set) public var exercise:Exercise
@@ -173,7 +171,7 @@ public class Drill: NSManagedObject {
         self.reps = reps
         self.weight = weight
     }
-*/
+
 }
 
 public class WorkoutDay: NSManagedObject {

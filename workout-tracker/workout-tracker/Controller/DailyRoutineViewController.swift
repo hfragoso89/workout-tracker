@@ -16,18 +16,18 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     
     private var isRoutineinProgress:Bool = false
     
-    //private var dayRoutine:[ExerciseGroup]!
+    private var dayRoutine:[ExerciseGroup]!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
-        //self.dayRoutine = DataService.instance.getRoutine().peekNextRoutine()
+        self.dayRoutine = DataService.instance.getRoutine().peekNextRoutine()
         var barTitle = ""
-//        for element in self.dayRoutine {
-//            barTitle += element.name + " "
-//        }
+        for element in self.dayRoutine {
+            barTitle += element.name + " "
+        }
         self.navigationItem.title = barTitle
         // Do any additional setup after loading the view.
     }

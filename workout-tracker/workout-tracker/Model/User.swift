@@ -9,14 +9,45 @@
 import UIKit
 import CoreData
 
-public class User : NSManagedObject {
-    /*
+class User {
+    
     private(set) public var firstName:String
     private(set) public var lastName:String
-    private(set) public var image:UIImage
-    private(set) public var birhdate:Date
+    private(set) public var image:UIImage?
+    private(set) public var birthdate:Date
     private(set) public var gender:Gender
-     */
+        
+    //TODO: Add a structure to support Weight and Heifhr objects
+    private(set) public var weight:Weight
+    private(set) public var height:Height
+    
+    init(
+        withFirstName firstName:String,
+        lastName: String,
+        image: UIImage?,
+        birthdate: Date,
+        height: Height,
+        weight: Weight,
+        andGender gender:Gender
+         )
+    {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.image = image
+        self.birthdate = birthdate
+        self.gender = gender
+        self.height = height
+        self.weight = weight
+    }
+    
+    func changePhoto(with image: UIImage) {
+        self.image = image
+    }
+    
+    func getAge() -> Int {
+        return Int(Date().timeIntervalSince(self.birthdate) / 31536000)
+    }
+    
  }
 
 

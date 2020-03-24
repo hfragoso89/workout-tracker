@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
-class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-    
+class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+       
     
     //Outlets
     @IBOutlet weak var controllerTitleLabel: UILabel!
@@ -28,6 +29,7 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer {didSet { updateUI() } }
     
     var numberOfDays:Int = 0 {
         willSet {
@@ -59,7 +61,26 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
     var dateFieldCurrentlyInEdition:DatePickerOptions = .none
     
     var routine:Routine?
-    
+   
+    /*
+    func updateUI(){
+        if let context = container?.viewContext {
+            let request: NSFetchRequest<Routine> = Routine.fetchRequest()
+            request.sortDescriptors = []
+            request.predicate = NSPredicate(format:"")
+            fetchedResultsController = NSFetchedResultsController<Routine>(
+                fetchRequest:request,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+                )
+            fetchedResultsController?.delegate = self
+            try? fetchedResultsController?.performFetch()
+            
+        }
+    }
+    */
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.delegate = self
@@ -71,10 +92,7 @@ class RoutineEditorViewController: UIViewController, UICollectionViewDelegate, U
         self.endDateField.delegate = self
         // Do any additional setup after loading the view.
         
-        if self.routine == nil {
-            self.routine = Routine(withName: "Nueva Rutina", image: UIImage(), startDate: Date(), endDate: nil, owner: DataService.instance.getUser(), days:
-                [[ExerciseGroup(withName: "Nuevo", andDrills: [])]], andWeekdays: nil)
-        }
+        self.routine = Routine(withName: "Nueva Rutina", image: UIImage(), startDate: Date(), endDate: nil, owner: DataService.instance.getUser(), days: [[ExerciseGroup(withName: "Nuevo", andDrills: [])]], andWeekdays: nil)
     }
     
     // MARK: - IBAction methods

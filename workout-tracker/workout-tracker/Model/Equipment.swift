@@ -9,10 +9,10 @@
 import UIKit
 import CoreData
 
-public class Equipment: NSManagedObject {
-    /*
+struct Equipment {
+
     private(set) public var name: String
-    private(set) public var descriptionText: String
+    private(set) public var description: String
     private(set) public var image: UIImage?
     private(set) public var muscleGroups: [MuscleGroup]?
     
@@ -27,5 +27,4 @@ public class Equipment: NSManagedObject {
         self.image = image
         self.muscleGroups = muscleGroups
     }
-    */
 }
