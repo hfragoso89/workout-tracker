@@ -25,8 +25,7 @@ public class ManagedUser: NSManagedObject {
             throw error
         }
         let createdUser = ManagedUser(context:context)
-        createdUser.firstName = "Héctor"
-        createdUser.lastName = "Fragoso"
+        
         
         return createdUser
     }

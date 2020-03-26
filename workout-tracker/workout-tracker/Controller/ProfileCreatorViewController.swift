@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ProfileCreatorViewController: UITableViewController {
-
+class ProfileCreatorViewController: UITableViewController, EditableUserComponentCellDelegate {
+    
+    @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var datePickerControl: UIDatePicker!
+    
+    
     var user:User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,27 +44,32 @@ class ProfileCreatorViewController: UITableViewController {
             }
         case 2:
             if let componentCell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as? EditableUserComponentCell {
-                componentCell.setupUI(forComponent:"Primer nombre", withValue: user.firstName)
+                componentCell.setupUI(forComponent:"Primer nombre", withValue: user.firstName, andInputType: .text)
+                componentCell.delegate = self
                 return componentCell
             }
         case 3:
             if let componentCell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as? EditableUserComponentCell {
-                componentCell.setupUI(forComponent:"Apellidos", withValue: user.lastName)
+                componentCell.setupUI(forComponent:"Apellidos", withValue: user.lastName, andInputType: .text)
+                componentCell.delegate = self
                 return componentCell
             }
         case 4:
             if let componentCell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as? EditableUserComponentCell {
-                componentCell.setupUI(forComponent:"Edad", withValue: "\(user.getAge())")
+                componentCell.setupUI(forComponent:"Edad", withValue: "\(user.getAge())", andInputType: .date)
+                componentCell.delegate = self
                 return componentCell
             }
         case 5:
             if let componentCell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as? EditableUserComponentCell {
-                componentCell.setupUI(forComponent:"Peso", withValue: user.weight.stringValue(for: .kg, withPrecision: 1))
+                componentCell.setupUI(forComponent:"Peso", withValue: user.weight?.stringValue(for: .kg, withPrecision: 1) ?? "", andInputType: .weight)
+                componentCell.delegate = self
                 return componentCell
             }
         case 6:
             if let componentCell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as? EditableUserComponentCell {
-                componentCell.setupUI(forComponent:"Estatura", withValue: user.height.stringValue(for: .m, withPrecision: 2))
+                componentCell.setupUI(forComponent:"Estatura", withValue: user.height?.stringValue(for: .m, withPrecision: 2) ?? "", andInputType: .height)
+                componentCell.delegate = self
                 return componentCell
             }
         default:
@@ -67,7 +77,32 @@ class ProfileCreatorViewController: UITableViewController {
         }
         return UITableViewCell()
     }
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 130
+        }
+        if indexPath.row == 1 {
+            return 50
+        }
+        return 42
+    }
+    
+    
+    // MARK: - EditableUserComponentCellDelegate methods
+    
+    func callDateSelector(forField field: UITextField) {
+        
+    }
+    
+    func callHeightSelector(forField field: UITextField) {
+        
+    }
+    
+    func callWeihgtSelector(forField field: UITextField) {
+        
+    }
+    
     /*
     // MARK: - Navigation
 

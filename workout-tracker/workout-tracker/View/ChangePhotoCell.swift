@@ -16,16 +16,16 @@ class ChangePhotoCell: UITableViewCell {
     
     var photo:UIImage? {
         didSet {
-            if self.photo != nil {
+            if self.photo == nil {
                 photoImage.image = nil
-                photoImage.isHidden = true
-                photoPlaceHolder.image = UIImage(named: "camera.circle")
-                photoActionImage.image = UIImage(named: "plus.circle.fill")
+                photoImage.isHidden = false
+                photoPlaceHolder.image = UIImage(systemName: "camera.circle")
+                photoActionImage.image = UIImage(systemName: "plus.circle.fill")
             } else {
                 photoImage.image = photo
                 photoImage.isHidden = false
                 photoPlaceHolder.image = UIImage(named: "Ring")
-                photoActionImage.image = UIImage(named: "pencil.circle.fill")
+                photoActionImage.image = UIImage(systemName: "pencil.circle.fill")
             }
             self.setNeedsDisplay()
         }
@@ -40,7 +40,7 @@ class ChangePhotoCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 

@@ -119,9 +119,9 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     
     func toggleBarButtonItem() {
         if !isRoutineinProgress {
-            
+            self.startRoutineButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         } else {
-            
+            self.startRoutineButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         }
     }
 

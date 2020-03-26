@@ -15,9 +15,9 @@ class DataService {
     
     private let defaultImage = UIImage(named: "Routine_btn_dark")!
     
-    private let user = User(withFirstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birthdate: Date("1989/12/31"), height: Height(withMValue: 1.75), weight: Weight(withKgValue: 80.1), andGender: .male)
+    private let user = User(withFirstName: "Héctor", lastName: "Fragoso",userName: "hfragoso", image: UIImage(named: "User_btn_dark")!, birthdate: Date("1989/12/31"), height: Height(withMValue: 1.75), weight: Weight(withKgValue: 80.1), andGender: .male)
     
-    private let routine = Routine(withName: "Rutina 1", image: UIImage(named: "Weights_image")!, startDate: Date("2020/02/17"), endDate: Date("2020/03/17"), owner: User(withFirstName: "Héctor", lastName: "Fragoso", image: UIImage(named: "User_btn_dark")!, birthdate: Date("1989/12/31"), height: Height(withMValue: 1.75), weight: Weight(withKgValue: 80.1), andGender: .male), days:
+    private let routine = Routine(withName: "Rutina 1", image: UIImage(named: "Weights_image")!, startDate: Date("2020/02/17"), endDate: Date("2020/03/17"), owner: User(withFirstName: "Héctor", lastName: "Fragoso",userName: "hfragoso", image: UIImage(named: "User_btn_dark")!, birthdate: Date("1989/12/31"), height: Height(withMValue: 1.75), weight: Weight(withKgValue: 80.1), andGender: .male), days:
         [
             [
                 ExerciseGroup(withName: "Hombros", andDrills:

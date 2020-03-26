@@ -16,6 +16,9 @@ class EditableUserComponentCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var editImage: UIImageView!
     
+    var inputType:inputType = .undefined
+    var delegate:EditableUserComponentCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,9 +31,11 @@ class EditableUserComponentCell: UITableViewCell, UITextFieldDelegate {
         // Configure the view for the selected state
     }
     
-    func setupUI(forComponent component:String, withValue value:String) {
+    func setupUI(forComponent component:String, withValue value:String, andInputType type:inputType) {
         self.componenNametLabel.text = component
         self.componentValueLabel.text = value
+        self.textField.placeholder = component
+        self.inputType = type
     }
     
     @IBAction func editComponent(_ sender: Any) {
@@ -48,4 +53,53 @@ class EditableUserComponentCell: UITableViewCell, UITextFieldDelegate {
         editImage.isHidden = false
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        switch self.inputType {
+        case .text:
+            return true
+        case .date:
+            if let myDelegate = self.delegate {
+                myDelegate.callDateSelector(forField: textField)
+            }
+            return false
+        case .height:
+            if let myDelegate = self.delegate {
+                myDelegate.callHeightSelector(forField: textField)
+            }
+            return false
+        case .weight:
+            if let myDelegate = self.delegate {
+                myDelegate.callWeihgtSelector(forField: textField)
+            }
+            return false
+        default:
+            return true
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+}
+
+enum inputType {
+    case text
+    case date
+    case height
+    case weight
+    case undefined
+}
+
+protocol EditableUserComponentCellDelegate {
+
+    func callDateSelector(forField field:UITextField)
+    func callHeightSelector(forField field:UITextField)
+    func callWeihgtSelector(forField field:UITextField)
+    
+//    func dateSelectorDismissed() -> String
+//    func heightSelectorDismissed() -> String
+//    func weightSelectorDismissed() -> String
 }
