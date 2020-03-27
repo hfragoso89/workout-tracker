@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -41,6 +42,12 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     @IBOutlet weak var barButtonItem: UIBarButtonItem!
     
+    //Photo management outlets
+    @IBOutlet weak var userPhotoImageView: UIImageView!
+    @IBOutlet weak var frameImageView: UIImageView!
+    @IBOutlet weak var photoActionImageView: UIImageView!
+    @IBOutlet weak var photoActionButton: UIButton!
+    
     var imagePicker = UIImagePickerController()
     
     var user:User?
@@ -48,6 +55,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     var editMode:Bool = false
     
     var pickerViewType:PickerViewType = .gender
+    
+    var container:NSPersistentContainer? = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +76,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.imagePicker.delegate = self
         
         editMode = false
-        if user == nil {
+        
+        if let myUser = try? ManagedUser.findMyUser(in: container!.viewContext) {
+            user = User(withManagedUser: myUser)
+        } else {
             // create the alert
             self.user = User()
             let alert = UIAlertController(title: "Advertencia", message: "No se encontró usuario, ¿Desea crear su perfil?", preferredStyle: UIAlertController.Style.alert)
@@ -89,7 +101,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     
     @IBAction func barButtonItemPressed(_ sender: Any) {
-        saveChangesToProfile()
+        if editMode { saveChangesToProfile() }
         self.editMode = !self.editMode
         loadUI()
     }
@@ -100,36 +112,77 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     private func loadUI() {
         if let myUser = user {
+            
+            // Set Values for DisplayStack labels
+            self.userNameLabel.text = myUser.userName
             self.firstNameLabel.text = myUser.firstName
             self.lastNameLabel.text = myUser.lastName
             self.genderLabel.text = myUser.gender == Gender.male ? "Hombre" : myUser.gender == Gender.female ? "Mujer" : ""
-            self.ageLabel.text = "\(myUser.getAge())"
-            self.weightLabel.text = myUser.weight?.stringValue(for: .kg, withPrecision: 1) ?? ""
-            self.heightLabel.text = myUser.height?.stringValue(for: .m, withPrecision: 2) ?? ""
+            self.ageLabel.text = "\(myUser.getAge())" != "0" ? "\(myUser.getAge())" : " "
+            self.weightLabel.text = myUser.weight?.stringValue(for: .kg, withPrecision: 1) ?? "" == "0.0 kg." ? " " : myUser.weight?.stringValue(for: .kg, withPrecision: 1)
+            self.heightLabel.text = myUser.height?.stringValue(for: .m, withPrecision: 2) ?? "" == "0.0 m." ? " " : myUser.height?.stringValue(for: .m, withPrecision: 2)
             
+            // Set Values for EditStack labels
+            self.userNameTextField.text = myUser.userName
             self.firstNameTextField.text = myUser.firstName
             self.lastNameTextField.text = myUser.lastName
             self.genderTextField.text = myUser.gender == Gender.male ? "Hombre" : myUser.gender == Gender.female ? "Mujer" : ""
-            self.ageTextField.text = "\(myUser.getAge())"
-            self.weightTextField.text = myUser.weight?.stringValue(for: .kg, withPrecision: 1) ?? ""
-            self.heightTextField.text = myUser.height?.stringValue(for: .m, withPrecision: 2) ?? ""
+            self.ageTextField.text = "\(myUser.getAge())" != "0" ? "\(myUser.getAge())" : ""
+            self.weightTextField.text = myUser.weight?.stringValue(for: .kg, withPrecision: 1) ?? "" == "0.0 kg." ? "" : myUser.weight?.stringValue(for: .kg, withPrecision: 1)
+            self.heightTextField.text = myUser.height?.stringValue(for: .m, withPrecision: 2) ?? "" == "0.0 m." ? "" : myUser.height?.stringValue(for: .m, withPrecision: 2)
+            
+            // Set display image
+            self.userPhotoImageView.image = myUser.image
+            self.userPhotoImageView.layer.cornerRadius = (self.userPhotoImageView.frame.size.width) / 2 + 15
+            self.frameImageView.image = myUser.image != nil ? UIImage(named: "Ring") : UIImage(systemName: "person.crop.circle")
         }
+        
+        // Toggle editMode
         if editMode {
             displayStackView.isHidden = true
             editStackView.isHidden = false
             barButtonItem.title = "Guardar"
+            self.photoActionButton.isEnabled = true
+            photoActionImageView.isHidden = false
+            photoActionImageView.image = self.userPhotoImageView.image == nil ? UIImage(systemName: "plus.circle") : UIImage(systemName: "pencil.circle")
         } else {
             displayStackView.isHidden = false
             editStackView.isHidden = true
             barButtonItem.title = "Editar"
+            self.photoActionButton.isEnabled = false
+
+            photoActionImageView.isHidden = true
         }
         self.tabBarController?.setNeedsStatusBarAppearanceUpdate()
     }
     
     
-    // TODO: - Create functionality
+    // TODO: - Finish functionality
     func saveChangesToProfile() {
-        
+        if let context = container?.viewContext {
+            context.perform { [weak self] in
+                if let myUser = try? ManagedUser.findOrCreateUser(matching: self!.user ?? User(), in:context) {
+                    myUser.me = true
+                    myUser.userName = self?.user?.userName
+                    myUser.firstName = self?.user?.firstName
+                    myUser.lastName = self?.user?.lastName
+                    myUser.dateOfBirth = self?.user?.birthdate
+                    myUser.gender = self?.user?.gender ?? .undefined == .male ? 0 : 1
+                    if let photo = self?.user?.image {
+                        myUser.photo = photo.pngData()
+                    }
+                    myUser.heightUnit = 0
+                    myUser.height = self?.user?.height?.doubleValue(for: .cm, withPrecision: 1) ?? 0.0
+                    myUser.weightUnit = 0
+                    myUser.weight = self?.user?.weight?.doubleValue(for: .kg, withPrecision: 1) ?? 0.0
+                    do {
+                        try context.save()
+                    } catch {
+                        print("Error in save operation: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func editProfilePressed(_ sender: Any) {
@@ -152,7 +205,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.ageLabel.text = "\(self.user!.getAge())"
         self.dismissDatePickerView(animated: true)
     }
+    
     @IBAction func selectOptionButtonPressed(_ sender: Any) {
+        switch self.pickerViewType {
+        case .gender:
+            self.user!.gender = self.pickerControl.selectedRow(inComponent: 0) == 0 ? Gender.male : Gender.female
+        case .heightFt:
+            self.user!.height = Height(withFtInchValue: (self.pickerControl.selectedRow(inComponent: 0),self.pickerControl.selectedRow(inComponent: 1)))
+        case .heightM:
+            self.user!.height = Height(withCmValue: (Double(self.pickerControl.selectedRow(inComponent: 0)) * 100.0) + Double(self.pickerControl.selectedRow(inComponent: 1)))
+        case .weight:
+            let selectedWeightValue = Double(self.pickerControl.selectedRow(inComponent: 0)) + (Double(self.pickerControl.selectedRow(inComponent: 1)) / 10)
+            self.user!.weight = self.pickerControl.selectedRow(inComponent: 2) == 0 ?
+                Weight(withKgValue: selectedWeightValue) : Weight(withLbValue: selectedWeightValue)
+        }
+        loadUI()
         self.dismissPickerView(animated: true)
     }
     
@@ -195,9 +262,24 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
       
     func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case self.userNameTextField:
+            _ = self.user!.changeUserName(with: textField.text ?? self.user!.userName)
+        case self.firstNameTextField:
+            self.user!.firstName = textField.text ?? self.user!.firstName
+        case self.lastNameTextField:
+            self.user!.lastName = textField.text ?? self.user!.lastName
+        default:
+            textField.resignFirstResponder()
+        }
         textField.resignFirstResponder()
+        loadUI()
     }
     
     func preparePickerView(for type:PickerViewType) {
@@ -214,6 +296,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             inComponent: 1,
             animated: false)
         case .heightM:
+            print("Current Height: (\(self.user?.height?.mCmRawValue().m),\(self.user?.height?.mCmRawValue().cm))")
             self.pickerControl.selectRow(
                 self.user?.height?.mCmRawValue().m ?? 1,
                 inComponent: 0,
@@ -242,10 +325,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     
     // MARK: - AnimationMethods
-    
-//    func disableButton(_ button:UIButton, animated: Bool) {
-//        button.isEnabled = !button.isEnabled
-//    }
     
     func showDatePickerView(animated: Bool){
         if !self.dateSelectorView.isHidden {return}
@@ -303,8 +382,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             return 2
         case .weight:
             return 3
-        default:
-            return 1
         }
     }
     
@@ -326,14 +403,12 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             }
         case .weight:
             if component == 0 {
-                return 200
+                return 400
             } else if component == 1 {
-                return 9
+                return 10
             } else {
                 return 2
             }
-        default:
-            return 1
         }
     }
     
@@ -361,8 +436,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             } else {
                 return row == 0 ? "Kg." : "Lb."
             }
-        default:
-            return nil
         }
     }
     
@@ -391,30 +464,38 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
                     print(types)
                 }
             }
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-                print("photo library")
-                for types in mediaTypes! {
-                    print(types)
-                }
-            }
-            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
-                print("savedphotosAlbum")
-                for types in mediaTypes! {
-                    print(types)
-                }
-            }
-            
-    //        self.imagePicker.mediaTypes = (mediaTypes)!
+//            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+//                print("photo library")
+//                for types in mediaTypes! {
+//                    print(types)
+//                }
+//            }
+//            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+//                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
+//                print("savedphotosAlbum")
+//                for types in mediaTypes! {
+//                    print(types)
+//                }
+//            }
+        self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.mediaTypes = ["public.image"]
+            self.imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
     
-    private func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info:NSDictionary!) {
-        var tempImage:UIImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let tempImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        self.user?.changePhoto(with: tempImage)
+        self.loadUI()
         picker.dismiss(animated: true, completion: nil)
     }
+//    private func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info:NSDictionary!) {
+//        let tempImage:UIImage =
+//
+//    }
+    
 
     
     /*

@@ -26,14 +26,14 @@ class User {
         return newUserName
     }
     
-    private(set) public var userName:String
-    private(set) public var firstName:String
-    private(set) public var lastName:String
+    var userName:String
+    var firstName:String
+    var lastName:String
     private(set) public var image:UIImage?
-    public var birthdate:Date
-    private(set) public var gender:Gender
-    private(set) public var weight:Weight?
-    private(set) public var height:Height?
+    var birthdate:Date
+    var gender:Gender
+    var weight:Weight?
+    var height:Height?
     
     init() {
         self.userName = User.generateUserName()
@@ -71,8 +71,41 @@ class User {
         self.weight = weight
     }
     
+    init(withManagedUser user: ManagedUser) {
+        if let newUserName = user.userName, User.validateUserName(newUserName) {
+            self.userName = newUserName
+        } else {
+            self.userName = User.generateUserName()
+        }
+        self.firstName = user.firstName ?? ""
+        self.lastName = user.lastName ?? ""
+        if user.photo != nil {
+            self.image = UIImage(data:user.photo!)
+        } else {
+            self.image = nil
+        }
+        self.birthdate = user.dateOfBirth ?? Date()
+        if user.gender != nil {
+            self.gender = user.gender == 0 ? .male : .female
+        } else {
+            self.gender = .undefined
+        }
+        if user.height != nil, user.heightUnit != nil {
+            self.height = user.heightUnit == 0 ? Height(withCmValue: user.height) : user.heightUnit == 1 ? Height(withInchValue: user.height) : Height(withFtValue: user.height)
+        }
+        self.weight = Weight(withKgValue: user.weight)
+    }
+    
     func changePhoto(with image: UIImage) {
         self.image = image
+    }
+    
+    func changeUserName(with newUserName:String) -> Bool {
+        if User.validateUserName(newUserName){
+            self.userName = newUserName
+            return true
+        }
+        return false
     }
     
     func getAge() -> Int {

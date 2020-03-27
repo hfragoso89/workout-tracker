@@ -51,10 +51,15 @@
     <entity name="ManagedUser" representedClassName=".ManagedUser" syncable="YES" codeGenerationType="category">
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="1" usesScalarValueType="YES"/>
+        <attribute name="height" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="heightUnit" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="me" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary"/>
-        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="weightUnit" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="1" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="currentRoutine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="owner" inverseEntity="ManagedRoutine"/>
         <relationship name="routines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="user" inverseEntity="ManagedRoutine"/>
     </entity>
@@ -69,15 +74,15 @@
         <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="workoutDays" inverseEntity="ManagedRoutine"/>
     </entity>
     <elements>
-        <element name="ManagedEquipment" positionX="-228.46484375" positionY="103.98046875" width="128" height="118"/>
-        <element name="ManagedVariations" positionX="189.5546875" positionY="-138.69921875" width="128" height="73"/>
-        <element name="ManagedMuscleGroup" positionX="163.953125" positionY="83.140625" width="128" height="88"/>
-        <element name="ManagedExercise" positionX="-62.41015625" positionY="-239.21875" width="128" height="28"/>
         <element name="ManagedDificulty" positionX="98.10546875" positionY="-230.8125" width="128" height="73"/>
-        <element name="ManagedUser" positionX="-667.63671875" positionY="215.58984375" width="128" height="163"/>
-        <element name="ManagedRoutine" positionX="-427.3203125" positionY="99.24609375" width="128" height="148"/>
-        <element name="ManagedExerciseGroup" positionX="-679.28125" positionY="-96.00390625" width="128" height="88"/>
-        <element name="ManagedWorkoutDay" positionX="-351.77734375" positionY="-39.03515625" width="128" height="103"/>
         <element name="ManagedDrill" positionX="-514.96484375" positionY="-175.04296875" width="128" height="133"/>
+        <element name="ManagedEquipment" positionX="-228.46484375" positionY="103.98046875" width="128" height="118"/>
+        <element name="ManagedExercise" positionX="-62.41015625" positionY="-239.21875" width="128" height="28"/>
+        <element name="ManagedExerciseGroup" positionX="-679.28125" positionY="-96.00390625" width="128" height="88"/>
+        <element name="ManagedMuscleGroup" positionX="163.953125" positionY="83.140625" width="128" height="88"/>
+        <element name="ManagedRoutine" positionX="-427.3203125" positionY="99.24609375" width="128" height="148"/>
+        <element name="ManagedUser" positionX="-667.63671875" positionY="215.58984375" width="128" height="238"/>
+        <element name="ManagedVariations" positionX="189.5546875" positionY="-138.69921875" width="128" height="73"/>
+        <element name="ManagedWorkoutDay" positionX="-351.77734375" positionY="-39.03515625" width="128" height="103"/>
     </elements>
 </model>

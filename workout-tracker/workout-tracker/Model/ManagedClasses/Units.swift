@@ -66,10 +66,10 @@ struct Height {
         self.mValue = value / 100
         self.inchValue = value / 2.54
         self.ftValue = value * 0.0328084
-        self.mCmValue.m = Int(self.cmValue.truncatingRemainder(dividingBy: 100))
-        self.mCmValue.cm = Int(value - Double(self.mCmValue.m * 100))
-        self.ftInchValue.ft = Int(self.ftValue.truncatingRemainder(dividingBy: 1.0))
-        self.ftInchValue.inch = Int(value - (Double(self.ftInchValue.ft) / 0.0328084))
+        self.mCmValue.m = Int(self.cmValue / 100)
+        self.mCmValue.cm = Int(self.cmValue - Double(self.mCmValue.m * 100))
+        self.ftInchValue.ft = Int(self.ftValue)
+        self.ftInchValue.inch = Int((self.cmValue - (Double(self.ftInchValue.ft) / 0.0328084)) / 2.54)
     }
     
     init(withMValue value:Double) {
@@ -77,10 +77,10 @@ struct Height {
         self.mValue = value
         self.inchValue = value * 39.37008
         self.ftValue = value * 3.28084
-        self.mCmValue.m = Int(self.cmValue.truncatingRemainder(dividingBy: 100))
-        self.mCmValue.cm = Int(value - Double(self.mCmValue.m * 100))
-        self.ftInchValue.ft = Int(self.ftValue.truncatingRemainder(dividingBy: 1.0))
-        self.ftInchValue.inch = Int(value - (Double(self.ftInchValue.ft) / 0.0328084))
+        self.mCmValue.m = Int(self.cmValue / 100)
+        self.mCmValue.cm = Int(self.cmValue - Double(self.mCmValue.m * 100))
+        self.ftInchValue.ft = Int(self.ftValue)
+        self.ftInchValue.inch = Int((self.cmValue - (Double(self.ftInchValue.ft) / 0.0328084)) / 2.54)
     }
     
     init(withInchValue value:Double) {
@@ -88,10 +88,10 @@ struct Height {
         self.mValue = value * 0.0254
         self.inchValue = value
         self.ftValue = value * 0.08333333
-        self.mCmValue.m = Int(self.cmValue.truncatingRemainder(dividingBy: 100))
-        self.mCmValue.cm = Int(value - Double(self.mCmValue.m * 100))
-        self.ftInchValue.ft = Int(self.ftValue.truncatingRemainder(dividingBy: 1.0))
-        self.ftInchValue.inch = Int(value - (Double(self.ftInchValue.ft) / 0.0328084))
+        self.mCmValue.m = Int(self.cmValue / 100)
+        self.mCmValue.cm = Int(self.cmValue - Double(self.mCmValue.m * 100))
+        self.ftInchValue.ft = Int(self.ftValue)
+        self.ftInchValue.inch = Int((self.cmValue - (Double(self.ftInchValue.ft) / 0.0328084)) / 2.54)
     }
     
     init(withFtValue value:Double) {
@@ -99,10 +99,10 @@ struct Height {
         self.mValue = value * 0.3048
         self.inchValue = value * 12
         self.ftValue = value
-        self.mCmValue.m = Int(self.cmValue.truncatingRemainder(dividingBy: 100))
-        self.mCmValue.cm = Int(value - Double(self.mCmValue.m * 100))
-        self.ftInchValue.ft = Int(self.ftValue.truncatingRemainder(dividingBy: 1.0))
-        self.ftInchValue.inch = Int(value - (Double(self.ftInchValue.ft) / 0.0328084))
+        self.mCmValue.m = Int(self.cmValue / 100)
+        self.mCmValue.cm = Int(self.cmValue - Double(self.mCmValue.m * 100))
+        self.ftInchValue.ft = Int(self.ftValue)
+        self.ftInchValue.inch = Int((self.cmValue - (Double(self.ftInchValue.ft) / 0.0328084)) / 2.54)
     }
     
     init(withFtInchValue value:(ft:Int,inch:Int)) {
@@ -111,8 +111,8 @@ struct Height {
         self.mValue = cmCalculatedValue / 100
         self.inchValue = cmCalculatedValue / 2.5
         self.ftValue = cmCalculatedValue * 0.0328084
-        self.mCmValue.m = Int(self.cmValue.truncatingRemainder(dividingBy: 100))
-        self.mCmValue.cm = Int(cmCalculatedValue - Double(self.mCmValue.m * 100))
+        self.mCmValue.m = Int(self.cmValue / 100)
+        self.mCmValue.cm = Int(self.cmValue - Double(self.mCmValue.m * 100))
         self.ftInchValue = value
     }
     
