@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate {
 
     //Labels
     @IBOutlet weak var userNameLabel: UILabel!
@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     @IBOutlet weak var photoActionImageView: UIImageView!
     @IBOutlet weak var photoActionButton: UIButton!
     
-    var imagePicker = UIImagePickerController()
+    var customImagePicker: ImagePickerViewController!
     
     var user:User?
     
@@ -72,8 +72,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.pickerControl.delegate = self
         self.pickerControl.dataSource = self
         
-        self.imagePicker.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.imagePicker.delegate = self
+        self.customImagePicker = ImagePickerViewController(presentationController: self, delegate: self)
         
         editMode = false
         
@@ -101,13 +100,27 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     
     @IBAction func barButtonItemPressed(_ sender: Any) {
-        if editMode { saveChangesToProfile() }
-        self.editMode = !self.editMode
-        loadUI()
+        if !editMode {
+            self.editMode = !self.editMode
+            loadUI()
+            return
+        }
+        if validateDataForSave() {
+            saveChangesToProfile()
+            self.editMode = !self.editMode
+            loadUI()
+        } else {
+            // create the alert
+            let alert = UIAlertController(title: "Advertencia", message: "Algunos campos requeridos no se han completado", preferredStyle: UIAlertController.Style.alert)
+            // add the actions (buttons)
+            alert.addAction(UIAlertAction(title: "De acuerdo", style: UIAlertAction.Style.default,handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func photoButtonPressed(_ sender: Any) {
-        showImagePickerView()
+        self.customImagePicker.present(from: sender as! UIButton)
     }
     
     private func loadUI() {
@@ -156,6 +169,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.tabBarController?.setNeedsStatusBarAppearanceUpdate()
     }
     
+    // TODO: - Improve data validation
+    private func validateDataForSave() -> Bool {
+        if self.userNameLabel.text != "" &&
+        self.firstNameLabel.text != "" &&
+        self.lastNameLabel.text != "" {
+            return true
+        }
+        return false
+    }
     
     // TODO: - Finish functionality
     func saveChangesToProfile() {
@@ -296,7 +318,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             inComponent: 1,
             animated: false)
         case .heightM:
-            print("Current Height: (\(self.user?.height?.mCmRawValue().m),\(self.user?.height?.mCmRawValue().cm))")
             self.pickerControl.selectRow(
                 self.user?.height?.mCmRawValue().m ?? 1,
                 inComponent: 0,
@@ -455,47 +476,12 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     // MARK: - UIImagePickerControllerDelegate Methods
     
-    func showImagePickerView() {
-            var mediaTypes:[String]? = []
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .camera)!
-                print("camera")
-                for types in mediaTypes! {
-                    print(types)
-                }
-            }
-//            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-//                print("photo library")
-//                for types in mediaTypes! {
-//                    print(types)
-//                }
-//            }
-//            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-//                mediaTypes! += UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
-//                print("savedphotosAlbum")
-//                for types in mediaTypes! {
-//                    print(types)
-//                }
-//            }
-        self.imagePicker.sourceType = .photoLibrary
-            self.imagePicker.mediaTypes = ["public.image"]
-            self.imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
+    func didSelect(image: UIImage?) {
+        if let selectedImage = image {
+            self.user?.changePhoto(with: selectedImage)
+            loadUI()
         }
-    
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let tempImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
-        self.user?.changePhoto(with: tempImage)
-        self.loadUI()
-        picker.dismiss(animated: true, completion: nil)
     }
-//    private func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info:NSDictionary!) {
-//        let tempImage:UIImage =
-//
-//    }
-    
 
     
     /*
