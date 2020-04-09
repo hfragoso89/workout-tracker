@@ -7,13 +7,14 @@
     <entity name="ManagedDrill" representedClassName=".ManagedDrill" syncable="YES" codeGenerationType="category">
         <attribute name="numberOfDrills" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="reptetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weightUnit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ManagedExercise" inverseName="drills" inverseEntity="ManagedExercise"/>
         <relationship name="exerciseGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedExerciseGroup" inverseName="drills" inverseEntity="ManagedExerciseGroup"/>
     </entity>
     <entity name="ManagedEquipment" representedClassName=".ManagedEquipment" syncable="YES" codeGenerationType="category" coreSpotlightDisplayNameExpression="Equipment">
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="equipmentType" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedExercise" inverseName="equipment" inverseEntity="ManagedExercise"/>
@@ -43,9 +44,11 @@
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="routineQueue" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="routinesByMe" inverseEntity="ManagedUser"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="currentRoutine" inverseEntity="ManagedUser"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="routines" inverseEntity="ManagedUser"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="oldRoutines" inverseEntity="ManagedUser"/>
         <relationship name="workoutDays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedWorkoutDay" inverseName="routine" inverseEntity="ManagedWorkoutDay"/>
     </entity>
     <entity name="ManagedUser" representedClassName=".ManagedUser" syncable="YES" codeGenerationType="category">
@@ -61,28 +64,30 @@
         <attribute name="weight" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
         <attribute name="weightUnit" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="1" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="currentRoutine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="owner" inverseEntity="ManagedRoutine"/>
-        <relationship name="routines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="user" inverseEntity="ManagedRoutine"/>
+        <relationship name="oldRoutines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="user" inverseEntity="ManagedRoutine"/>
+        <relationship name="routinesByMe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="author" inverseEntity="ManagedRoutine"/>
     </entity>
     <entity name="ManagedVariations" representedClassName=".ManagedVariations" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedExercise" inverseName="variations" inverseEntity="ManagedExercise"/>
     </entity>
     <entity name="ManagedWorkoutDay" representedClassName=".ManagedWorkoutDay" syncable="YES" codeGenerationType="category">
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="weekDay" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="7" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exerciseGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedExerciseGroup" inverseName="workoutDays" inverseEntity="ManagedExerciseGroup"/>
         <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedRoutine" inverseName="workoutDays" inverseEntity="ManagedRoutine"/>
     </entity>
     <elements>
-        <element name="ManagedDificulty" positionX="98.10546875" positionY="-230.8125" width="128" height="73"/>
-        <element name="ManagedDrill" positionX="-514.96484375" positionY="-175.04296875" width="128" height="133"/>
-        <element name="ManagedEquipment" positionX="-228.46484375" positionY="103.98046875" width="128" height="118"/>
-        <element name="ManagedExercise" positionX="-62.41015625" positionY="-239.21875" width="128" height="28"/>
+        <element name="ManagedDificulty" positionX="169.2421875" positionY="-234.265625" width="128" height="73"/>
+        <element name="ManagedDrill" positionX="-516.76953125" positionY="-172.578125" width="128" height="133"/>
+        <element name="ManagedEquipment" positionX="-229.578125" positionY="107.54296875" width="128" height="133"/>
+        <element name="ManagedExercise" positionX="-64.21484375" positionY="-236.75390625" width="128" height="163"/>
         <element name="ManagedExerciseGroup" positionX="-679.28125" positionY="-96.00390625" width="128" height="88"/>
-        <element name="ManagedMuscleGroup" positionX="163.953125" positionY="83.140625" width="128" height="88"/>
-        <element name="ManagedRoutine" positionX="-427.3203125" positionY="99.24609375" width="128" height="148"/>
-        <element name="ManagedUser" positionX="-667.63671875" positionY="215.58984375" width="128" height="238"/>
+        <element name="ManagedMuscleGroup" positionX="92.83984375" positionY="93.55859375" width="128" height="88"/>
+        <element name="ManagedRoutine" positionX="-427.3203125" positionY="99.24609375" width="128" height="178"/>
+        <element name="ManagedUser" positionX="-667.63671875" positionY="215.58984375" width="128" height="253"/>
         <element name="ManagedVariations" positionX="189.5546875" positionY="-138.69921875" width="128" height="73"/>
-        <element name="ManagedWorkoutDay" positionX="-351.77734375" positionY="-39.03515625" width="128" height="103"/>
+        <element name="ManagedWorkoutDay" positionX="-351.77734375" positionY="-39.03515625" width="128" height="118"/>
     </elements>
 </model>

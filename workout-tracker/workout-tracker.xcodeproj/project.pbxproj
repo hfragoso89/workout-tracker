@@ -50,7 +50,7 @@
 		6BEAA3CE242EF0AC00130A80 /* TodaysRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3CD242EF0AC00130A80 /* TodaysRoutineCell.swift */; };
 		6BEAA3D0242EF0F900130A80 /* TitleForSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3CF242EF0F900130A80 /* TitleForSectionCell.swift */; };
 		6BEAA3D2242EF12F00130A80 /* SeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3D1242EF12F00130A80 /* SeparatorCell.swift */; };
-		6BEAA3D4242EF16E00130A80 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3D3242EF16E00130A80 /* CollectionViewCell.swift */; };
+		6BEAA3D4242EF16E00130A80 /* CollectionViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3D3242EF16E00130A80 /* CollectionViewTableCell.swift */; };
 		6BEAA3D6242F0A5B00130A80 /* RoutineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3D5242F0A5B00130A80 /* RoutineCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,7 +101,7 @@
 		6BEAA3CD242EF0AC00130A80 /* TodaysRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysRoutineCell.swift; sourceTree = "<group>"; };
 		6BEAA3CF242EF0F900130A80 /* TitleForSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleForSectionCell.swift; sourceTree = "<group>"; };
 		6BEAA3D1242EF12F00130A80 /* SeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorCell.swift; sourceTree = "<group>"; };
-		6BEAA3D3242EF16E00130A80 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		6BEAA3D3242EF16E00130A80 /* CollectionViewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableCell.swift; sourceTree = "<group>"; };
 		6BEAA3D5242F0A5B00130A80 /* RoutineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,7 +183,7 @@
 				6BEAA3CD242EF0AC00130A80 /* TodaysRoutineCell.swift */,
 				6BEAA3CF242EF0F900130A80 /* TitleForSectionCell.swift */,
 				6BEAA3D1242EF12F00130A80 /* SeparatorCell.swift */,
-				6BEAA3D3242EF16E00130A80 /* CollectionViewCell.swift */,
+				6BEAA3D3242EF16E00130A80 /* CollectionViewTableCell.swift */,
 				6BEAA3D5242F0A5B00130A80 /* RoutineCollectionViewCell.swift */,
 			);
 			path = View;
@@ -317,7 +317,7 @@
 				6B527C20242DB20D00E7B518 /* ImagePickerViewController.swift in Sources */,
 				6BD7F3362426F8C000500D86 /* EditableUserComponentCell.swift in Sources */,
 				6BB4F7D624138394002862AA /* DataService.swift in Sources */,
-				6BEAA3D4242EF16E00130A80 /* CollectionViewCell.swift in Sources */,
+				6BEAA3D4242EF16E00130A80 /* CollectionViewTableCell.swift in Sources */,
 				6BB4F7DE241487DE002862AA /* User.swift in Sources */,
 				6BB4F7D324138064002862AA /* ExcerciseCell.swift in Sources */,
 				6BB4F7DC24146700002862AA /* Routine.swift in Sources */,

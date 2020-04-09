@@ -27,7 +27,7 @@ class RoutineViewController: UIViewController {
         startDateLabel.text = "Inicio: \(dateformatter.string(from: DataService.instance.getRoutine().startDate))"
         endDateLabel.text = "Fin: \(dateformatter.string(from: DataService.instance.getRoutine().endDate!))"
         
-        self.navigationItem.title = "Holi"
+        self.navigationItem.title = "Rutina"
             //= DataService.instance.getRoutine().name
         
         // Do any additional setup after loading the view.

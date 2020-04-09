@@ -51,16 +51,16 @@ class DayEditorCollectionCell: UICollectionViewCell, UIPickerViewDelegate, UIPic
             let currentDrill = dayRoutine?[indexPath.section].drills[indexPath.row]
             //            var variations = currentDrill.drill.exercise.description
                         var variations = ""
-            if let equipment = currentDrill?.drill.exercise.equipment {
+            if let equipment = currentDrill?.exercise.equipment {
                             variations += " Equipo: \(equipment.name)"
                         }
-            if let extras = currentDrill?.drill.exercise.variations {
+            if let extras = currentDrill?.exercise.variations {
                             variations += "\n"
                             for variation in extras {
                                 variations += "\(variation) "
                             }
                         }
-            displayCell.setContentOfCell(withExcerciseImage: currentDrill!.drill.exercise.image, excerciseName: currentDrill!.drill.exercise.name, exerciseDescription: variations, equipmentImage: currentDrill?.drill.exercise.equipment?.image, repsNumber: String(currentDrill!.drill.reps), andSeriesNumber: String(currentDrill?.numberOfDrills ?? 0))
+            displayCell.setContentOfCell(withExcerciseImage: currentDrill!.exercise.image, excerciseName: currentDrill!.exercise.name, exerciseDescription: variations, equipmentImage: currentDrill?.exercise.equipment?.image, repsNumber: String(currentDrill!.reps), andSeriesNumber: String(currentDrill?.numberOfDrills ?? 0))
             return displayCell
         }
         return UITableViewCell()

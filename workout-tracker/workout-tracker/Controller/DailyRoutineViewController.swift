@@ -55,10 +55,10 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
             let currentDrill = dayRoutine[indexPath.section].drills[indexPath.row]
 //            var variations = currentDrill.drill.exercise.description
             var variations = ""
-            if let equipment = currentDrill.drill.exercise.equipment {
+            if let equipment = currentDrill.exercise.equipment {
                 variations += " Equipo: \(equipment.name)"
             }
-            if let extras = currentDrill.drill.exercise.variations {
+            if let extras = currentDrill.exercise.variations {
                 variations += "\n"
                 for variation in extras {
                     variations += "\(variation) "
@@ -70,7 +70,7 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
             //V2
             //cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, repsNumber: "\(currentDrill.drill.reps)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
             //V3
-            cell.setContentOfCell(withExcerciseImage: currentDrill.drill.exercise.image, excerciseName: currentDrill.drill.exercise.name, exerciseDescription: variations, equipmentImage: currentDrill.drill.exercise.equipment?.image, repsNumber: "\(currentDrill.drill.reps)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
+            cell.setContentOfCell(withExcerciseImage: currentDrill.exercise.image, excerciseName: currentDrill.exercise.name, exerciseDescription: variations, equipmentImage: currentDrill.exercise.equipment?.image, repsNumber: "\(currentDrill.reps)", andSeriesNumber: "\(currentDrill.numberOfDrills ?? 0)")
 
             return cell
         } else { return ExcerciseCell() }
@@ -110,7 +110,7 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     private func finishRoutine() {
-        //DataService.instance.getRoutine().popNextRoutine()
+        DataService.instance.getRoutine().popNextRoutine()
         logProgress()
         isRoutineinProgress = false
         navigationController?.popViewController(animated: true)
@@ -123,6 +123,7 @@ class DailyRoutineViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             self.startRoutineButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         }
+        self.navigationController?.reloadInputViews()
     }
 
     

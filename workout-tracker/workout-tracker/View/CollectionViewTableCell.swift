@@ -8,9 +8,11 @@
 
 import UIKit
 
-class CollectionViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CollectionViewTableCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var routinesArray: [Routine]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,11 +26,14 @@ class CollectionViewCell: UITableViewCell, UICollectionViewDelegate, UICollectio
 //    MARK: - CollectionViewDataSource Methods
     
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        return routinesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RoutineCollectionViewCell", for: indexPath) as? RoutineCollectionViewCell {
+            cell.setUpUI(withRoutineName: routinesArray[indexPath.row].name, routineDetails: routinesArray[indexPath.row].name, andBackGroundImage: routinesArray[indexPath.row].image ?? UIImage(named: "reach_goal")!)
+            //SetTintColor
+            //ActivateBookMark if necessary
             return cell
         }
         return UICollectionViewCell()
