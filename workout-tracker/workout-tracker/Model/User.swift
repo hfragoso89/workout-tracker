@@ -52,8 +52,8 @@ class User {
         userName: String?,
         image: UIImage?,
         birthdate: Date,
-        height: Height,
-        weight: Weight,
+        height: Height?,
+        weight: Weight?,
         andGender gender:Gender
          )
     {

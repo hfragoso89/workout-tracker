@@ -98,6 +98,83 @@ class DataService {
         ]
     ])
  
+    private let topWorkouts = [
+        WorkoutDay(withName: "Runner legs", image: UIImage(named: "runner")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Calentamiento", andDrills:
+                    [
+                    Drill(withExercise: Exercise(withName: "Elevación de rodilla", description: "Alternado", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 10, numberOfDrills: 1, andWeightObject: nil),
+                    Drill(withExercise: Exercise(withName: "Rotación tobillo izquierdo", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .calves, equipment: nil, dificulty: .beginer, variations: nil), reps: 10, numberOfDrills: 1, andWeightObject: nil),
+                    Drill(withExercise: Exercise(withName: "Rotación tobillo derecho", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .calves, equipment: nil, dificulty: .beginer, variations: nil), reps: 10, numberOfDrills: 1, andWeightObject: nil),
+                    Drill(withExercise: Exercise(withName: "Flexión de rodillas", description: "Rodillas y tobillos juntos. Hacer flexión hasta 45 grados.", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 10, numberOfDrills: 1, andWeightObject: nil),
+                    Drill(withExercise: Exercise(withName: "Extensión de cuadríceps", description: "Alternar: Mantener un pie en el suelo y el otro acercarlo al glúteo. La rodilla del pie que se levanta debe apuntar al suelo.", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 10, numberOfDrills: 1, andWeightObject: nil)
+                    ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                    [
+                        Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                    ]),
+                ExerciseGroup(withName: "Pantorrillas", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ])
+        ]),
+        WorkoutDay(withName: "Beach Body", image: UIImage(named: "beach_body")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ])
+            ]),
+        WorkoutDay(withName: "Yoga morning", image: UIImage(named: "yoga")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+            ]),
+        WorkoutDay(withName: "No1. Runner", image: UIImage(named: "reach_goal")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+            ]),
+        WorkoutDay(withName: "Rise up 'n shine", image: UIImage(named: "daily_workout")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+            ]),
+        WorkoutDay(withName: "Greater Strenght", image: UIImage(named: "beast_mode")!, weekDay: nil, andExerciseGroups:
+            [
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+                ExerciseGroup(withName: "Cuadríceps", andDrills:
+                [
+                    Drill(withExercise: Exercise(withName: "Squat", description: "", image: UIImage(named:"Routine_btn_dark")!, muscleGroup: .quads, equipment: nil, dificulty: .beginer, variations: nil), reps: 15, numberOfDrills: 3, andWeightObject: nil),
+                ]),
+            ])
+    ]
+    
     private let equipmentOptions = [
         "ZBar": Equipment(withName: "Barra Z", description: "", image: UIImage(named: "Z_bar_icon_white")!, andMuscleGroups:
             [
@@ -176,7 +253,8 @@ class DataService {
             ]
         ),
     ]
-
+    
+    private let goalsArray = ["Tonificar", "Fortalecer", "Aumentar masa muscular", "Bajar de peso", "Ejercitarme en casa", "Mantenerme en forma", "Liberar estrés", "Ponerme mamadísimo", "Otro"]
     
     // MARK: - CoreDataManagement
     
@@ -263,8 +341,32 @@ class DataService {
         return equipmentOptions
     }
     
+    func getTopWorkouts() -> [WorkoutDay] {
+        return topWorkouts
+    }
+    
     func getDefaultImage() -> UIImage {
         return defaultImage
     }
     
+    func getGoalsArray() -> [String] {
+        return goalsArray
+    }
+    
+}
+
+enum appImages:String {
+    case beach_body_male="beach_body"
+    case beach_body_female="beachGirl"
+    case beast_mode="beast_mode"
+    case best_self="best_self"
+    case boxer_power="boxer_power"
+    case daily_workout="daily_workout"
+    case futbol_player="futbol_player"
+    case handstand_man="handstand_man"
+    case nopain="nopain"
+    case plank_girl="plank_girl"
+    case reach_goal="reach_goal"
+    case runner="runner"
+    case yoga="yoga"
 }

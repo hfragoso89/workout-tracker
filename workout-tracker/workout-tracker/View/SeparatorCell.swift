@@ -21,7 +21,7 @@ class SeparatorCell: UITableViewCell {
     
     func setupUI(withTitle title:String, andCellType type:SeparatorCellType) {
         self.titleLabel.text = title
-        self.iconImageView.image = UIImage(systemName: type.rawValue)
+        self.iconImageView.image = UIImage(systemName:type.rawValue)
     }
     
     func setCellTint(_ color:UIColor){
@@ -37,8 +37,8 @@ class SeparatorCell: UITableViewCell {
 }
 
 enum SeparatorCellType:String {
-    case downArrow="down.arrow"
-    case upArrow="up.arrow"
+    case downArrow="arrow.down"
+    case upArrow="arrow.up"
     case person="person.crop.circle"
     case personFilled="person.crop.circle.fill"
 }

@@ -76,6 +76,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         
         editMode = false
         
+        do {
+            _ = try ManagedUser.findMyUser(in: container!.viewContext)
+        } catch {
+            print("Error retrieving my user: \(error.localizedDescription)")
+        }
         if let myUser = try? ManagedUser.findMyUser(in: container!.viewContext) {
             user = User(withManagedUser: myUser)
         } else {

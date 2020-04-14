@@ -12,9 +12,9 @@
 		6B16A153241B4AE1008986E8 /* DayEditorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16A152241B4AE1008986E8 /* DayEditorCollectionCell.swift */; };
 		6B2009BF241745D40026CBC9 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2009BE241745D40026CBC9 /* BorderButton.swift */; };
 		6B527C20242DB20D00E7B518 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B527C1F242DB20D00E7B518 /* ImagePickerViewController.swift */; };
+		6B5BE478244033D800E8103E /* StartupWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5BE477244033D800E8103E /* StartupWizardViewController.swift */; };
 		6BB4F7AB24121440002862AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7AA24121440002862AA /* AppDelegate.swift */; };
 		6BB4F7AD24121440002862AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7AC24121440002862AA /* SceneDelegate.swift */; };
-		6BB4F7AF24121440002862AA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7AE24121440002862AA /* MainViewController.swift */; };
 		6BB4F7B224121440002862AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB4F7B024121440002862AA /* Main.storyboard */; };
 		6BB4F7B524121440002862AA /* workout_tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4F7B324121440002862AA /* workout_tracker.xcdatamodeld */; };
 		6BB4F7B724121441002862AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BB4F7B624121441002862AA /* Assets.xcassets */; };
@@ -46,6 +46,8 @@
 		6BD7F3382426FA0500500D86 /* ChangePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD7F3372426FA0500500D86 /* ChangePhotoCell.swift */; };
 		6BD7F33A2427109900500D86 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD7F3392427109900500D86 /* Units.swift */; };
 		6BE067E02419FF4100003947 /* WorkoutLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE067DF2419FF4100003947 /* WorkoutLog.swift */; };
+		6BE68A9C24410AAD00F01CD9 /* StartupWizardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE68A9B24410AAD00F01CD9 /* StartupWizardCollectionViewCell.swift */; };
+		6BE68A9E244113F400F01CD9 /* GoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE68A9D244113F400F01CD9 /* GoalCollectionViewCell.swift */; };
 		6BEAA3CC242EEE6600130A80 /* TodaysRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3CB242EEE6600130A80 /* TodaysRoutineViewController.swift */; };
 		6BEAA3CE242EF0AC00130A80 /* TodaysRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3CD242EF0AC00130A80 /* TodaysRoutineCell.swift */; };
 		6BEAA3D0242EF0F900130A80 /* TitleForSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAA3CF242EF0F900130A80 /* TitleForSectionCell.swift */; };
@@ -60,10 +62,10 @@
 		6B16A152241B4AE1008986E8 /* DayEditorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEditorCollectionCell.swift; sourceTree = "<group>"; };
 		6B2009BE241745D40026CBC9 /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		6B527C1F242DB20D00E7B518 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		6B5BE477244033D800E8103E /* StartupWizardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupWizardViewController.swift; sourceTree = "<group>"; };
 		6BB4F7A724121440002862AA /* workout-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "workout-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB4F7AA24121440002862AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BB4F7AC24121440002862AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6BB4F7AE24121440002862AA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6BB4F7B124121440002862AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BB4F7B424121440002862AA /* workout_tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = workout_tracker.xcdatamodel; sourceTree = "<group>"; };
 		6BB4F7B624121441002862AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,6 +99,8 @@
 		6BD7F3372426FA0500500D86 /* ChangePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoCell.swift; sourceTree = "<group>"; };
 		6BD7F3392427109900500D86 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		6BE067DF2419FF4100003947 /* WorkoutLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLog.swift; sourceTree = "<group>"; };
+		6BE68A9B24410AAD00F01CD9 /* StartupWizardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupWizardCollectionViewCell.swift; sourceTree = "<group>"; };
+		6BE68A9D244113F400F01CD9 /* GoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BEAA3CB242EEE6600130A80 /* TodaysRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysRoutineViewController.swift; sourceTree = "<group>"; };
 		6BEAA3CD242EF0AC00130A80 /* TodaysRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysRoutineCell.swift; sourceTree = "<group>"; };
 		6BEAA3CF242EF0F900130A80 /* TitleForSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleForSectionCell.swift; sourceTree = "<group>"; };
@@ -156,7 +160,6 @@
 		6BB4F7C12412228C002862AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6BB4F7AE24121440002862AA /* MainViewController.swift */,
 				6BB4F7C624136DC4002862AA /* RoutineViewController.swift */,
 				6BB4F7C824136DD4002862AA /* ProfileViewController.swift */,
 				6BB4F7CA24136DEA002862AA /* ProfileCreatorViewController.swift */,
@@ -164,6 +167,7 @@
 				6BB4F7CE24137E39002862AA /* DailyRoutineViewController.swift */,
 				6B16A14E241B2BCC008986E8 /* RoutineEditorViewController.swift */,
 				6BEAA3CB242EEE6600130A80 /* TodaysRoutineViewController.swift */,
+				6B5BE477244033D800E8103E /* StartupWizardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -185,6 +189,8 @@
 				6BEAA3D1242EF12F00130A80 /* SeparatorCell.swift */,
 				6BEAA3D3242EF16E00130A80 /* CollectionViewTableCell.swift */,
 				6BEAA3D5242F0A5B00130A80 /* RoutineCollectionViewCell.swift */,
+				6BE68A9B24410AAD00F01CD9 /* StartupWizardCollectionViewCell.swift */,
+				6BE68A9D244113F400F01CD9 /* GoalCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,16 +312,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BB4F7AF24121440002862AA /* MainViewController.swift in Sources */,
 				6BD7F32C2426E05B00500D86 /* ManagedExerciseGroup.swift in Sources */,
 				6BB4F7CB24136DEA002862AA /* ProfileCreatorViewController.swift in Sources */,
 				6BEAA3CE242EF0AC00130A80 /* TodaysRoutineCell.swift in Sources */,
 				6BD7F3282426E02000500D86 /* ManagedExercise.swift in Sources */,
 				6BB4F7C724136DC4002862AA /* RoutineViewController.swift in Sources */,
 				6BEAA3D6242F0A5B00130A80 /* RoutineCollectionViewCell.swift in Sources */,
+				6BE68A9E244113F400F01CD9 /* GoalCollectionViewCell.swift in Sources */,
 				6B16A153241B4AE1008986E8 /* DayEditorCollectionCell.swift in Sources */,
 				6B527C20242DB20D00E7B518 /* ImagePickerViewController.swift in Sources */,
 				6BD7F3362426F8C000500D86 /* EditableUserComponentCell.swift in Sources */,
+				6BE68A9C24410AAD00F01CD9 /* StartupWizardCollectionViewCell.swift in Sources */,
 				6BB4F7D624138394002862AA /* DataService.swift in Sources */,
 				6BEAA3D4242EF16E00130A80 /* CollectionViewTableCell.swift in Sources */,
 				6BB4F7DE241487DE002862AA /* User.swift in Sources */,
@@ -341,6 +348,7 @@
 				6BEAA3D2242EF12F00130A80 /* SeparatorCell.swift in Sources */,
 				6BB4F7D82414305F002862AA /* Exercise.swift in Sources */,
 				6BB4F7B524121440002862AA /* workout_tracker.xcdatamodeld in Sources */,
+				6B5BE478244033D800E8103E /* StartupWizardViewController.swift in Sources */,
 				6BB4F7AD24121440002862AA /* SceneDelegate.swift in Sources */,
 				6BB4F7DA24146290002862AA /* Equipment.swift in Sources */,
 				6BD7F3322426E20500500D86 /* ManagedEquipment.swift in Sources */,

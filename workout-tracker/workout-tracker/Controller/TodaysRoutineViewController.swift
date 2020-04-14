@@ -17,8 +17,8 @@ class TodaysRoutineViewController: UIViewController, UITableViewDelegate, UITabl
     // UIElements
     var elementsArray:[(type:TodaysRoutineComponentType,component:Any?)]?
     var routine:Routine?
-    var topRoutines:[Routine]?
-    var routinesHistory:[Routine]?
+    var topWorkouts:[WorkoutDay]?
+    var routinesHistory:[WorkoutDay]?
     
      var container:NSPersistentContainer? = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     
@@ -31,8 +31,9 @@ class TodaysRoutineViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         self.elementsArray = []
         
+        topWorkouts = DataService.instance.getTopWorkouts()
         routine = DataService.instance.getRoutine()
-        print("Routine: \(routine?.name)")
+//        print("Routine: \(routine?.name)")
         if let myCurrentSavedRoutine = try?ManagedRoutine.findMyCurrentRoutine(in: container!.viewContext) {
             print("Current routineFound")
             routine = Routine(withManagedRoutine: myCurrentSavedRoutine)
@@ -40,26 +41,34 @@ class TodaysRoutineViewController: UIViewController, UITableViewDelegate, UITabl
             print("Assigning routine to myUser")
             let context = container!.viewContext
             context.perform { [weak self] in
-                let myUser = try?ManagedUser.findMyUser(in: context)
-                print("Current User = \(myUser?.firstName) \(myUser?.lastName)")
-                do{
-                    myUser?.currentRoutine = try ManagedRoutine.findOrCreateRoutine(matching: self!.routine!, in: context)
-                } catch {
-                    print("\n:(\nRoutine assignment error:\(error.localizedDescription)")
+                if let myUser = try?ManagedUser.findMyUser(in: context){
+                    print("Current User = \(myUser.firstName) \(myUser.lastName)")
+                    do{
+                        myUser.currentRoutine = try ManagedRoutine.findOrCreateRoutine(matching: self!.routine!, in: context)
+                    } catch {
+                        print("\n:(\nRoutine assignment error:\(error.localizedDescription)")
+                    }
+                    print("\(myUser.firstName) \(myUser.lastName)'s new current routine is: \(myUser.currentRoutine?.name)")
+                    do {
+                        try context.save()
+                    } catch {
+                        print("\n:(\nSaving error:\(error.localizedDescription)")
+                    }
+                    print("assignment Succesful! :)")
+                    self!.updateUI()
+                } else {
+                    self?.parent?.parent?.performSegue(withIdentifier: "startUpWizard", sender: self?.parent?.parent)
                 }
-                print("\(myUser?.firstName) \(myUser?.lastName)'s new current routine is: \(myUser?.currentRoutine?.name)")
-                do {
-                    try context.save()
-                } catch {
-                    print("\n:(\nSaving error:\(error.localizedDescription)")
-                }
-                print("assignment Succesful! :)")
-                self!.updateUI()
             }
             
             
         }
         print("Routine to show: \(routine?.name)")
+        updateUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("Today: \(self.routine?.getTodaysRoutineName())")
         updateUI()
     }
     
@@ -71,16 +80,16 @@ class TodaysRoutineViewController: UIViewController, UITableViewDelegate, UITabl
             elementsArray?.append((TodaysRoutineComponentType.separator,"Más rutinas"))
         } else {
             elementsArray?.append((TodaysRoutineComponentType.title, "Selecciona tu primera rutina"))
-            //elementsArray?.append((TodaysRoutineComponentType.routineCollection, topRoutines))
+            elementsArray?.append((TodaysRoutineComponentType.routineCollection, topWorkouts))
             return
         }
         if routinesHistory != nil {
             elementsArray?.append((TodaysRoutineComponentType.title, "Historial de rutinas"))
             elementsArray?.append((TodaysRoutineComponentType.routineCollection, routinesHistory))
         }
-        if topRoutines != nil {
+        if topWorkouts != nil {
             elementsArray?.append((TodaysRoutineComponentType.title, "Rutinas destacadas"))
-            elementsArray?.append((TodaysRoutineComponentType.routineCollection, topRoutines))
+            elementsArray?.append((TodaysRoutineComponentType.routineCollection, topWorkouts))
         }
         
     }
@@ -102,14 +111,19 @@ class TodaysRoutineViewController: UIViewController, UITableViewDelegate, UITabl
             }
         case .separator:
             if let separatorCell = tableView.dequeueReusableCell(withIdentifier: "separatorCell", for: indexPath) as? SeparatorCell {
+                let separatorTitle = element.component as! String
+                separatorCell.setupUI(withTitle: separatorTitle, andCellType: .downArrow)
                 return separatorCell
             }
         case .title:
             if let titleCell = tableView.dequeueReusableCell(withIdentifier: "routineSelectorTitle", for: indexPath) as? TitleForSectionCell {
+                titleCell.setTitle(element.component as! String)
                 return titleCell
             }
         case .routineCollection:
             if let routineSelectorCell = tableView.dequeueReusableCell(withIdentifier: "routineSelector", for: indexPath) as? CollectionViewTableCell {
+                
+                routineSelectorCell.routinesArray = element.component as! [WorkoutDay]
                 return routineSelectorCell
             }
         }

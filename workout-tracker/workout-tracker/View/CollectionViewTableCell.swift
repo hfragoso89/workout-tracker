@@ -12,7 +12,7 @@ class CollectionViewTableCell: UITableViewCell, UICollectionViewDelegate, UIColl
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var routinesArray: [Routine]!
+    var routinesArray: [WorkoutDay]!
     
     override func awakeFromNib() {
         super.awakeFromNib()

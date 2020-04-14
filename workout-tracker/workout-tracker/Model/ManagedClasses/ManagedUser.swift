@@ -24,7 +24,7 @@ public class ManagedUser: NSManagedObject {
         } catch {
             throw error
         }
-        let createdUser = ManagedUser(context:context)
+        let createdUser = createManagedUser(with: user, in: context)
         return createdUser
     }
     

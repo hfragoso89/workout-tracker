@@ -245,6 +245,7 @@ class Routine {
     
     ///Returns the name of the upcoming Workoutday in the rountie queue or the one that matches the current weekday.
     func getTodaysRoutineName() -> String {
+        print(routineQueue)
         var result = ""
         for day in peekNextRoutine() {
             if result != "" { result += " · "}
