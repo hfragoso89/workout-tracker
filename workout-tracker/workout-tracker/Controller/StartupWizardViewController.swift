@@ -29,6 +29,9 @@ class StartupWizardViewController: UIViewController, UICollectionViewDelegate, U
         // Do any additional setup after loading the view.
         self.wizardCollectionView.frame = self.view.frame
         
+        self.wizardCollectionView.contentSize = CGSize(width: self.view.frame.width * 4, height: self.view.frame.height
+        )
+        
         self.newUser = User()
 
         self.customImagePicker = ImagePickerViewController(presentationController: self, delegate: self)
